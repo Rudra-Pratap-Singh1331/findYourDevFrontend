@@ -54,6 +54,7 @@ const ChatWindow = ({ chat }) => {
       text: newMessage,
       time: formattedTime,
     });
+    socketRef.current.emit("notifyTheUser", { _id, userId });
     setNewMessage("");
   };
 
