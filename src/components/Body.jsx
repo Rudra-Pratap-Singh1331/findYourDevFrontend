@@ -56,7 +56,7 @@ const Body = () => {
 
         <Outlet />
         {/* Right Sidebar */}
-        <RightSideBar requests={requests}  />
+        <RightSideBar requests={requests} />
       </div>
     </>
   );
