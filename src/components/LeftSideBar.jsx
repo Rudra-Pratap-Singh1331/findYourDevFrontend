@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,22 +9,21 @@ import { addChat } from "../store/chatSlice";
 import { createSocket } from "../constant/socketConnection";
 
 const LeftSideBar = () => {
-  const [friends, setFriends] = useState(null);
+  // const [friends, setFriends] = useState(null);
   const user = useSelector((store) => store.user);
   const userId = user?._id;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const friendList = useSelector((store) => store.friendList);
+  const friends = useSelector((store) => store.friendList);
   const fetchFreindList = async () => {
     try {
       const result = await axios.get("http://localhost:1001/user/friends", {
         withCredentials: true,
       });
-      const finalresult = result?.data?.friends?.map((frnds) => {
-        return { ...frnds, messageStatus: false };
-      });
-      setFriends(finalresult);
-      console.log(finalresult);
+      const finalresult = result?.data?.friends?.map((f) => ({
+        ...f,
+        messageStatus: false,
+      }));
       dispatch(addFriends(finalresult));
     } catch (error) {
       if (error?.response?.status === 401) {
@@ -44,9 +43,11 @@ const LeftSideBar = () => {
     socketRef.current.emit("joinNotificationService", { userId });
 
     socketRef.current.on("incomingMessage", ({ userId }) => {
-      setFriends((prevFriends) =>
-        prevFriends.map((f) =>
-          f._id === userId ? { ...f, messageStatus: true } : f
+      dispatch(
+        addFriends(
+          friends.map((f) =>
+            f._id === userId ? { ...f, messageStatus: true } : f
+          )
         )
       );
     });
@@ -56,7 +57,7 @@ const LeftSideBar = () => {
     };
   }, [userId]); //ye isliye kyuni first store empty n thats why
   useEffect(() => {
-    if (!friendList) {
+    if (!friends || friends.length === 0) {
       fetchFreindList();
     }
   }, []);
@@ -76,11 +77,13 @@ const LeftSideBar = () => {
             className="flex items-center gap-3 p-2 rounded-md hover:bg-[#2d2d30] cursor-pointer transition relative" // relative added
             onClick={() => {
               dispatch(addChat(f));
-              setFriends((prev) =>
-                prev.map((friend) =>
-                  f._id === friend._id
-                    ? { ...friend, messageStatus: false }
-                    : friend
+              dispatch(
+                addFriends(
+                  friends.map((friend) =>
+                    f._id === friend._id
+                      ? { ...friend, messageStatus: false }
+                      : friend
+                  )
                 )
               );
             }}
