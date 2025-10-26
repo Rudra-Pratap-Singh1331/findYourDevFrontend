@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
+
 const RightSideBar = ({ requests }) => {
+
   const [activeTab, setActiveTab] = useState("incoming");
+ 
 
   return (
     <div className="w-1/6 min-w-[180px] bg-[#252526] flex flex-col border-l border-[#333] shadow-md">
