@@ -79,7 +79,7 @@ const Navbar = () => {
           >
             <li>
               <Link
-                to="/updateprofile"
+                to="/profile"
                 className="justify-between hover:text-[#569cd6]"
               >
                 Profile
