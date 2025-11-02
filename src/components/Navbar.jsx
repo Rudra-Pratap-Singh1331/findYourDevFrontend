@@ -1,23 +1,30 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaUser, FaHammer, FaCode, FaFileAlt } from "react-icons/fa";
+import {
+  FaUser,
+  FaHammer,
+  FaCode,
+  FaFileAlt,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 import { AVATAR_DEFAULT_URL } from "../constant/constant";
 import { resetRdeuxStoreOnLogout } from "../helpers/resetReduxStoreOnLogout";
 
 const Navbar = () => {
   const userData = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const handleLogout = async () => {
     try {
       const result = await axios.post(
         "http://localhost:1001/logout",
         {},
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
       resetRdeuxStoreOnLogout(dispatch);
       toast.success(result.data.message);
@@ -27,19 +34,28 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-[#1e1e1e] shadow-md px-6 py-3 border-b border-[#333]">
+    <nav className="navbar bg-[#1e1e1e] shadow-md px-4 sm:px-6 py-3 border-b border-[#333] sticky top-0 z-50">
       {/* Left Section */}
-      <div className="flex-1 items-center flex gap-6">
+      <div className="flex-1 flex items-center justify-between">
+        {/* Logo */}
         <Link
           to="/"
-          className="text-2xl font-bold text-[#569cd6] hover:text-[#4fc1ff] transition"
+          className="text-xl sm:text-2xl font-bold text-[#569cd6] hover:text-[#4fc1ff] transition"
         >
-          DevTinder
+          findYourDev's
         </Link>
+
+        {/* Mobile Hamburger */}
+        <button
+          className="sm:hidden text-gray-300 hover:text-[#569cd6] text-xl"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
       </div>
 
-      {/* Right Section */}
-      <div className="flex items-center gap-10">
+      {/* Desktop Menu */}
+      <div className="hidden sm:flex items-center gap-8">
         <Link
           to="/hackathons"
           className="flex items-center gap-1 text-gray-300 hover:text-[#569cd6] font-medium transition"
@@ -105,7 +121,66 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-    </div>
+
+      {/* Mobile Dropdown Menu */}
+      {menuOpen && (
+        <div className="absolute top-16 left-0 w-full bg-[#1e1e1e] border-t border-[#333] flex flex-col items-center gap-4 py-5 sm:hidden animate-fade-in">
+          <Link
+            to="/hackathons"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-2 text-gray-300 hover:text-[#569cd6] font-medium"
+          >
+            <FaHammer /> Hackathons
+          </Link>
+          <Link
+            to="/devs"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-2 text-gray-300 hover:text-[#569cd6] font-medium"
+          >
+            <FaCode /> Devs
+          </Link>
+          <Link
+            to="/createpost"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-2 text-gray-300 hover:text-[#569cd6] font-medium"
+          >
+            <FaFileAlt /> Create Post
+          </Link>
+
+          {/* Avatar Dropdown for mobile */}
+          <div className="flex flex-col items-center gap-2">
+            <img
+              src={userData?.photoUrl || AVATAR_DEFAULT_URL}
+              alt="User Avatar"
+              className="w-10 h-10 rounded-full ring-2 ring-[#569cd6]"
+            />
+            <Link
+              to="/profile"
+              onClick={() => setMenuOpen(false)}
+              className="text-gray-300 hover:text-[#569cd6]"
+            >
+              Profile
+            </Link>
+            <Link
+              to="/myposts"
+              onClick={() => setMenuOpen(false)}
+              className="text-gray-300 hover:text-[#569cd6]"
+            >
+              My Posts
+            </Link>
+            <button
+              onClick={() => {
+                handleLogout();
+                setMenuOpen(false);
+              }}
+              className="text-red-400 hover:text-red-500"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      )}
+    </nav>
   );
 };
 

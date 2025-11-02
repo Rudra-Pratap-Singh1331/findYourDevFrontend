@@ -101,7 +101,7 @@ const ChatWindow = ({ chat }) => {
               <div
                 className={`chat-bubble max-w-[70%] break-words whitespace-pre-wrap shadow-md rounded-2xl
             ${
-              msg.self
+              msg.fromUserId===userId
                 ? "bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-gray-100"
                 : "bg-[#1f2024] text-gray-100"
             }`}

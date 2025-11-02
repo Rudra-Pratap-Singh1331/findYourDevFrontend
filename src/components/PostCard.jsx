@@ -123,20 +123,20 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
           className="flex items-center gap-2 hover:text-blue-500 transition-colors"
           onClick={() => {
             setShowCommentBoxStatus(() => {
-              return {showCommentBoxStatus:!showCommentBox.showCommentBoxStatus , postId:_id}
+              return {
+                showCommentBoxStatus: !showCommentBox.showCommentBoxStatus,
+                postId: _id,
+              };
             });
           }}
         >
           <FaRegCommentDots className="text-lg" /> Comments
         </button>
-        <button className="flex items-center gap-2 hover:text-blue-500 transition-colors">
-          <FaShareAlt className="text-lg" /> Share
-        </button>
       </div>
 
       {/* Comment Box */}
       <div className="flex items-center gap-3 mt-4">
-        <img src={user.photoUrl} alt="user" className="w-9 h-9 rounded-full" />
+        <img src={user?.photoUrl} alt="user" className="w-9 h-9 rounded-full" />
         <input
           type="text"
           placeholder="Write a comment..."
