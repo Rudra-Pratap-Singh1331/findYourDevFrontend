@@ -50,7 +50,7 @@ const DefaultProfile = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#1e1e1e] text-[#d4d4d4] p-6">
       <div className="bg-[#252526] shadow-xl rounded-2xl w-full max-w-3xl p-8 border border-[#3c3c3c]">
-        {/* Header */}
+     
         <div className="flex flex-col items-center gap-3 mb-8">
           <img
             src={user.photoUrl}
@@ -63,7 +63,7 @@ const DefaultProfile = () => {
           <p className="text-[#9cdcfe] text-sm">{user.designation || "User"}</p>
         </div>
 
-        {/* Details Grid */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <ProfileField label="Full Name" value={user.fullName} />
           <ProfileField label="Email" value={user.email} />
@@ -82,7 +82,7 @@ const DefaultProfile = () => {
           <ProfileField label="Designation" value={user.designation} />
         </div>
 
-        {/* Action Buttons */}
+   
         <div className="flex flex-col md:flex-row justify-center gap-4">
           <Link to="/updateprofile">
             <button className="px-6 py-2 rounded-lg bg-[#007acc] text-white font-medium hover:bg-[#0e639c] transition">

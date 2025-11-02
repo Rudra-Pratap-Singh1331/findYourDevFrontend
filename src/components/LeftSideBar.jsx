@@ -9,7 +9,7 @@ import { addChat } from "../store/chatSlice";
 import { createSocket } from "../constant/socketConnection";
 
 const LeftSideBar = () => {
-  // const [friends, setFriends] = useState(null);
+
   const user = useSelector((store) => store.user);
   const userId = user?._id;
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const LeftSideBar = () => {
     return () => {
       disconnect();
     };
-  }, [userId]); //ye isliye kyuni first store empty n thats why
+  }, [userId]); 
   useEffect(() => {
     if (!friends || friends.length === 0) {
       fetchFreindList();
@@ -64,17 +64,17 @@ const LeftSideBar = () => {
 
   return (
     <div className="hidden sm:flex w-1/5 min-w-[220px] bg-[#252526] flex-col border-r border-[#333] shadow-md">
-      {/* Header */}
+ 
       <h2 className="text-lg font-bold p-4 border-b border-[#333] text-[#569cd6]">
         Friends
       </h2>
 
-      {/* Friend List */}
+    
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {friends?.map((f) => (
           <div
             key={f._id}
-            className="flex items-center gap-3 p-2 rounded-md hover:bg-[#2d2d30] cursor-pointer transition relative" // relative added
+            className="flex items-center gap-3 p-2 rounded-md hover:bg-[#2d2d30] cursor-pointer transition relative" 
             onClick={() => {
               dispatch(addChat(f));
               dispatch(

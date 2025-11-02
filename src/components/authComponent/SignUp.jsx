@@ -43,14 +43,14 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] flex">
-      {/* Brand Name */}
+
       <div className="absolute top-6 left-8">
         <h1 className="text-3xl font-bold tracking-tight font-sans text-[#007ACC]">
           DevTinder.
         </h1>
       </div>
 
-      {/* Centered Form */}
+   
       <div className="flex flex-1 items-center justify-center">
         <form
           className="flex flex-col gap-6 p-10 bg-[#252526] rounded-2xl shadow-lg w-[420px] border border-[#3C3C3C]"
@@ -60,7 +60,7 @@ const SignUp = () => {
             Create an Account
           </h2>
 
-          {/* Full Name */}
+     
           <div>
             <label className="block text-sm font-medium text-[#CCCCCC] mb-1">
               Full Name
@@ -81,7 +81,7 @@ const SignUp = () => {
             )}
           </div>
 
-          {/* Email */}
+      
           <div>
             <label className="block text-sm font-medium text-[#CCCCCC] mb-1">
               Email
@@ -102,7 +102,7 @@ const SignUp = () => {
             )}
           </div>
 
-          {/* Password */}
+ 
           <div>
             <label className="block text-sm font-medium text-[#CCCCCC] mb-1">
               Password
@@ -125,7 +125,6 @@ const SignUp = () => {
             )}
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             className="w-full py-3 bg-[#007ACC] text-white rounded-lg font-medium hover:bg-[#3794FF] transition"

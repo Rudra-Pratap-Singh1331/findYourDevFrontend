@@ -46,7 +46,7 @@ const CreatePost = () => {
   };
 
   const handleOnChange = (e) => {
-    console.log(e);
+  
     const { name, value } = e.target;
     if (name === "postPhotoUrl") {
       setPostDetails((prev) => {
@@ -62,7 +62,7 @@ const CreatePost = () => {
   return (
     <div className="flex-1 flex justify-center items-center p-6 overflow-auto">
       <div className="bg-[#1E1E1E] text-white w-[70%] max-w-xl min-h-[500px] max-h-[90vh] rounded-lg shadow-lg p-8 relative">
-        {/* Close button */}
+  
         <button
           className="absolute top-3 right-3 text-gray-400 hover:text-white text-xl font-bold"
           onClick={() => {
@@ -72,13 +72,13 @@ const CreatePost = () => {
           ×
         </button>
 
-        {/* Form */}
+ 
         <form
           onSubmit={handleSubmit}
           encType="multipart/form-data"
           className="flex flex-col"
         >
-          {/* User info */}
+   
           <div className="flex items-center mb-4">
             <img
               src={userData?.photoUrl || AVATAR_DEFAULT_URL}
@@ -88,7 +88,6 @@ const CreatePost = () => {
             <span className="font-semibold text-lg">{userData?.fullName}</span>
           </div>
 
-          {/* Post content textarea */}
           <textarea
             className="w-full bg-[#252526] text-white p-3 rounded-md mb-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px] max-h-[300px] overflow-y-auto"
             rows={8}
@@ -99,7 +98,6 @@ const CreatePost = () => {
             required
           />
 
-          {/* Image upload */}
           <div className="mb-4">
             <label className="flex items-center cursor-pointer text-gray-400 hover:text-white">
               <span className="mr-2">Add image</span>
@@ -117,7 +115,6 @@ const CreatePost = () => {
             )}
           </div>
 
-          {/* Public / Private toggle */}
           <div className="flex items-center justify-start mb-6">
             <label className="flex items-center cursor-pointer">
               <input
@@ -138,7 +135,7 @@ const CreatePost = () => {
             </label>
           </div>
 
-          {/* Create Post button */}
+      
           {loading ? (
             <button type="button" class="bg-indigo-500 ..." disabled>
               <svg

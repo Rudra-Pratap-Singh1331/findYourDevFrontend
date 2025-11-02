@@ -16,7 +16,7 @@ const useFetchChat = (toUserId) => {
       setMessages(res?.data?.data);
     } catch (error) {
       setLoading(false)
-      console.log(error);
+     
     } finally { 
       setLoading(false)
     }

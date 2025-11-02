@@ -15,28 +15,28 @@ const ChatWindow = ({ chat }) => {
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef(null);
   const socketRef = useRef(null);
-  // Scroll to bottom when messages change
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Initialize socket
+
 
   useEffect(() => {
     const { socket, disconnect } = createSocket();
     socketRef.current = socket;
-    // Join chat room
+
     socketRef.current.emit("joinChat", { userId, _id });
 
-    // Listen for incoming messages
+ 
     socketRef.current.on("messageReceived", ({ text, time, userId }) => {
-      setMessages((prev) => [...prev, { text, time, fromUserId: userId }]); // mark as received
+      setMessages((prev) => [...prev, { text, time, fromUserId: userId }]);
     });
 
     return () => disconnect();
   }, [userId, _id]);
 
-  // Send a message
+ 
   const sendMessage = () => {
     if (newMessage.trim() === "") return;
     const currHour = new Date().getHours();
@@ -64,7 +64,7 @@ const ChatWindow = ({ chat }) => {
 
   return (
     <div className="flex flex-col h-full w-full bg-[#1e1e1e] border border-[#3c3c3c] rounded-lg">
-      {/* Header */}
+   
       <div className="flex items-center justify-between p-3 border-b border-[#252526]">
         <div className="flex items-center gap-3">
           <div className="avatar">
@@ -82,7 +82,7 @@ const ChatWindow = ({ chat }) => {
         </button>
       </div>
 
-      {/* Messages */}
+ 
       <div className="flex-1 overflow-y-auto p-3 space-y-2">
         {loading ? (
           <p className="text-center text-gray-500">Loading Your Chats..</p>
@@ -125,7 +125,7 @@ const ChatWindow = ({ chat }) => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Box */}
+   
       <div className="flex p-3 border-t border-[#252526] gap-2">
         <input
           type="text"

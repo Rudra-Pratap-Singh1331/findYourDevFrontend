@@ -16,7 +16,6 @@ const OtpPage = () => {
   const navigate = useNavigate();
   const loggedInUser = useSelector((store) => store.user);
 
-  // ✅ Fetch logged in user
   const fetchLoggedInUser = async () => {
     try {
       const { data } = await axios.get("http://localhost:1001/user/profile", {
@@ -31,7 +30,6 @@ const OtpPage = () => {
     }
   };
 
-  // ✅ Send OTP manually (not auto)
   const sendOtp = async () => {
     try {
       const res = await axios.post(
@@ -44,7 +42,6 @@ const OtpPage = () => {
 
       setOtpSent(true);
       toast.success("OTP sent to your email!");
-      console.log(res);
     } catch (error) {
       toast.error(
         error?.response?.data?.message || "Oops Something went wrong!"
@@ -52,7 +49,6 @@ const OtpPage = () => {
     }
   };
 
-  // ✅ Verify OTP
   const handleVerify = async () => {
     try {
       const res = await axios.post(
@@ -80,7 +76,6 @@ const OtpPage = () => {
     }
   };
 
-  // ✅ Update Password
   const handlePasswordSubmit = async () => {
     setFormError([]);
 
@@ -104,7 +99,6 @@ const OtpPage = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
       if (error.response?.data?.errors) {
         setFormError(error.response.data.errors);
       } else {
@@ -113,7 +107,6 @@ const OtpPage = () => {
     }
   };
 
-  // ✅ Only fetch user on mount
   useEffect(() => {
     if (!loggedInUser) fetchLoggedInUser();
   }, []);

@@ -13,11 +13,11 @@ const useFetchComment = (postId) => {
           withCredentials: true,
         }
       );
-      console.log(res);
+     
       setFetchedComments(res?.data?.data);
     } catch (error) {
       setLoading(false);
-      console.log(error);
+     
     } finally {
       setLoading(false);
     }

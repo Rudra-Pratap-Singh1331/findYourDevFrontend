@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { formatTime } from "../helpers/formatTime";
 
 const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
-  //fetching my photourl for comment purpose!!
-
   const user = useSelector((store) => store.user);
 
   const {
@@ -26,7 +25,6 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
   const [comment, setComment] = useState("");
 
   const handleLikeToggling = async () => {
-    //this is done because the setter function is async so if we use the value just after updateing the state we will be getting the older value only
     const newToggleValue = !toggleLike;
     if (newToggleValue) {
       setLikeCount(likeCount + 1);
@@ -71,13 +69,10 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
     }
   };
 
-  //converting the mongodb time to local time
-
-  const localtime = new Date(createdAt).toLocaleString();
+  const localtime = formatTime(createdAt);
 
   return (
     <div className="w-full max-w-2xl mx-auto bg-[#1e1e1e] border border-[#2d2d2d] rounded-xl shadow-md p-5 mt-6 transition-all duration-300 hover:shadow-lg hover:border-[#3a3a3a]">
-      {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         <img
           src={photoUrl || AVATAR_DEFAULT_URL}
@@ -91,10 +86,8 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
         </div>
       </div>
 
-      {/* Post Content */}
       <p className="text-[#e5e5e5] leading-relaxed mb-4">{postContent}</p>
 
-      {/* Post Image */}
       {postPhotoUrl ? (
         <div className="rounded-md overflow-hidden border border-[#2f2f2f] mb-4">
           <img
@@ -105,18 +98,13 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
         </div>
       ) : null}
 
-      {/* Actions */}
-      <div
-        className="flex justify-around items-center border-t border-[#2f2f2f] pt-3 text-[#d1d5db]"
-        // onClick={handleOnLike}
-      >
+      <div className="flex justify-around items-center border-t border-[#2f2f2f] pt-3 text-[#d1d5db]">
         <button
           className={`flex items-center gap-2 hover:text-red-500 ${
             toggleLike ? "text-red-500" : null
           } transition-colors`}
           onClick={handleLikeToggling}
         >
-          {/* {like.count} */}
           <FaHeart className="text-lg" /> {likeCount}
         </button>
         <button
@@ -134,7 +122,6 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
         </button>
       </div>
 
-      {/* Comment Box */}
       <div className="flex items-center gap-3 mt-4">
         <img src={user?.photoUrl} alt="user" className="w-9 h-9 rounded-full" />
         <input

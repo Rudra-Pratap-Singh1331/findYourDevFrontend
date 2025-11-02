@@ -21,6 +21,7 @@ const Devs = () => {
         withCredentials: true,
       });
       setFeed(devs?.data?.UsersToBeShowOnTheFeed);
+    
     } catch (error) {
       setLoading(false);
       if (error.response.status === 401) {
@@ -43,7 +44,7 @@ const Devs = () => {
       ) : (
         <div>
           <h2 className="text-xl font-bold mb-6 text-[#569cd6]">Developers</h2>
-          {/* Developer Grid with scrollable container */}
+        
           <div
             className="flex-1 overflow-y-auto pr-2"
             style={{ maxHeight: "calc(100vh - 80px)" }}
@@ -53,7 +54,7 @@ const Devs = () => {
                 ? Array(6)
                     .fill(0)
                     .map((_, i) => <DevShimmer key={i} />)
-                : feed?.map((p) => <DevsCard key={p.id} p={p} />)}
+                : feed?.map((p) => <DevsCard key={p._id} p={p} />)}
             </div>
           </div>
         </div>

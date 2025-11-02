@@ -7,7 +7,6 @@ const AppliedHackathonCard = ({ data, setPost }) => {
   const owner = hack?.ownerId;
   const formattedDate = new Date(hack?.hackathonDeadline).toLocaleDateString();
   const postedDate = new Date(data.createdAt).toLocaleDateString();
-  console.log(data?._id);
   const handleCancelRequest = async (id) => {
     try {
       const res = await axios.delete(
@@ -18,7 +17,7 @@ const AppliedHackathonCard = ({ data, setPost }) => {
         return prev.filter((p) => p._id != id);
       });
     } catch (error) {
-      console.log(error);
+    
       toast.error(error?.response?.data?.message);
     }
   };
@@ -26,7 +25,7 @@ const AppliedHackathonCard = ({ data, setPost }) => {
     <>
        
         <div className="w-full max-w-2xl mx-auto bg-[#1e1e1e] border border-[#2d2d2d] rounded-xl shadow-md p-5 mt-6 transition-all duration-300 hover:shadow-lg hover:border-[#3a3a3a]">
-          {/* Owner Info */}
+ 
           <div className="flex items-center gap-3 mb-4">
             <img
               src={owner?.photoUrl}
@@ -38,7 +37,7 @@ const AppliedHackathonCard = ({ data, setPost }) => {
               <p className="text-gray-400 text-sm">{owner?.designation}</p>
             </div>
           </div>
-          {/* Hackathon Image (optional) */}
+   
           {hack?.hackathonPostImage && (
             <img
               src={hack.hackathonPostImage}
@@ -46,14 +45,14 @@ const AppliedHackathonCard = ({ data, setPost }) => {
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
           )}
-          {/* Hackathon Details */}
+    
           <h2 className="text-xl font-bold text-white mb-2">
             {hack?.hackathonTitle}
           </h2>
           <p className="text-gray-400 text-sm mb-3">
             {hack?.hackathonDescription}
           </p>
-          {/* Info Section */}
+    
           <div className="flex flex-wrap items-center gap-3 mb-4 text-gray-300 text-sm">
             <div className="flex items-center gap-1">
               <AlertCircle size={16} className="text-blue-400" />
@@ -80,7 +79,7 @@ const AppliedHackathonCard = ({ data, setPost }) => {
               <span>Posted: {postedDate}</span>
             </div>
           </div>
-          {/* Status */}
+  
           <div className="mb-4">
             <span
               className={`px-3 py-1 rounded-full text-xs font-semibold ${

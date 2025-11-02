@@ -26,7 +26,7 @@ const RightSideBar = () => {
 
   return (
     <div className="w-1/5 min-w-[180px] bg-[#252526] flex flex-col border-l border-[#333] shadow-md overflow-x-hidden">
-      {/* Header */}
+
       <div
         role="tablist"
         className="tabs-bordered p-4 border-b border-[#333] text-center text-[#569cd6]"
@@ -34,7 +34,6 @@ const RightSideBar = () => {
         <p>Connection Requests</p>
       </div>
 
-      {/* Requests List */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {connections?.length === 0 ? (
           <div className="w-full flex flex-row justify-center">
@@ -47,7 +46,7 @@ const RightSideBar = () => {
               className="card w-full bg-[#1e1e1e] border border-[#2d2d2d] rounded-xl shadow-md transition-all duration-300 hover:shadow-lg hover:border-[#3a3a3a] overflow-hidden"
             >
               <div className="card-body flex flex-row items-center gap-4 p-4">
-                {/* User Image */}
+        
                 <div className="avatar flex-shrink-0">
                   <div className="w-8 h-8 rounded-full ring-2 ring-blue-500/30 overflow-hidden">
                     <img
@@ -66,7 +65,7 @@ const RightSideBar = () => {
                   </div>
                 </div>
 
-                {/* User Info */}
+      
                 <div className="flex-1 min-w-0">
                   <h2
                     className="card-title text-[#e5e5e5] break-words text-[10px]"
@@ -82,7 +81,6 @@ const RightSideBar = () => {
                   </h2>
                 </div>
 
-                {/* Status Badge */}
                 <div className="flex-shrink-0">
                   <span className="badge badge-warning text-[10px] font-medium text-black">
                     {user?.status}
@@ -90,7 +88,6 @@ const RightSideBar = () => {
                 </div>
               </div>
 
-              {/* Action Buttons */}
               {user?.fromUserId?._id === loggedInUser._id ? (
                 <div className="w-full text-center py-1">
                   {`sent on ${getDate(user?.createdAt)}`}

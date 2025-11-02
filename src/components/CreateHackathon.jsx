@@ -53,7 +53,7 @@ const CreateHackathon = () => {
       }
     } catch (err) {
       toast.error("Failed to create hackathon");
-      console.error(err);
+    
     }
   };
 
@@ -67,7 +67,7 @@ const CreateHackathon = () => {
           Create Hackathon
         </h2>
 
-        {/* Hackathon Title */}
+       
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium">
             Hackathon Title
@@ -82,7 +82,7 @@ const CreateHackathon = () => {
           />
         </div>
 
-        {/* Hackathon Type */}
+   
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium">
             Hackathon Type
@@ -98,7 +98,7 @@ const CreateHackathon = () => {
           />
         </div>
 
-        {/* Description */}
+   
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium">Description</label>
           <textarea
@@ -111,7 +111,7 @@ const CreateHackathon = () => {
           ></textarea>
         </div>
 
-        {/* Deadline */}
+     
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium">Deadline</label>
           <input
@@ -124,7 +124,7 @@ const CreateHackathon = () => {
           />
         </div>
 
-        {/* Team Required */}
+  
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium">
             Team Members Required
@@ -140,7 +140,7 @@ const CreateHackathon = () => {
           />
         </div>
 
-        {/* File Upload */}
+  
         <div className="mb-6">
           <label className="block mb-2 text-sm font-medium">
             Upload Hackathon Image
@@ -153,7 +153,7 @@ const CreateHackathon = () => {
           />
         </div>
 
-        {/* Submit Button */}
+    
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-medium py-2 rounded-md"

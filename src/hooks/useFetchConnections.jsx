@@ -12,7 +12,7 @@ const useFetchConnections = () => {
         withCredentials: true,
       });
       setConnections(result?.data?.data);
-      console.log(result?.data?.data);
+    
     } catch (error) {
       setLoading(false);
       toast.error("An error Occured while fetching Connection Requests!");

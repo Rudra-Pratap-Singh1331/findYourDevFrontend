@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import HackathonPostCard from "./HackathonPostCard";
+import { toast } from "react-toastify";
 
 const HackathonPostContainer = () => {
   const [post, setPost] = useState([]);
@@ -11,7 +12,7 @@ const HackathonPostContainer = () => {
       });
       setPost(post?.data?.hackathonList);
     } catch (error) {
-      console.log(error);
+      toast.error("Something went Wrong!")
     }
   };
 

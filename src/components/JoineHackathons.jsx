@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Users, User2, MessageSquare } from "lucide-react";
 import { FALLBACK_IMAGE } from "../constant/constant";
 import GroupedChat from "./GroupedChat";
+import { toast } from "react-toastify";
 const JoinedHackathons = () => {
   const [hackathon, setHackathon] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,10 +19,10 @@ const JoinedHackathons = () => {
         }
       );
       setHackathon(hackathons?.data?.data);
-      console.log(hackathons);
+
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      toast.error("Something went wrong!")
     } finally {
       setLoading(false);
     }

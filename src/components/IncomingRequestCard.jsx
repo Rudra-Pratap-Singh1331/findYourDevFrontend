@@ -11,10 +11,9 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
         `http://localhost:1001/hackathons/incomingrequest/${hackathonId}`,
         { withCredentials: true }
       );
-      console.log(res);
       setUser(res?.data?.data);
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong!")
     }
   };
 
@@ -30,7 +29,7 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
         return prev.filter((i) => i._id != _id);
       });
     } catch (error) {
-      console.log(error);
+  
       toast.error(error?.response?.data?.message);
     }
   };
@@ -43,9 +42,9 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
     handleOnViewRequest(hackathonId);
   }, []);
   return (
-    // <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+  
     <div className="w-full max-w-2xl mx-auto bg-[#1e1e1e] border border-[#2d2d2d] rounded-xl shadow-md p-5 mt-6 transition-all duration-300 hover:shadow-[0_0_12px_#007acc55] hover:border-[#3a3a3a]">
-      {/* Close Button */}
+   
       <button
         onClick={onClose}
         className="absolute top-19 right-32 text-gray-400 hover:text-white transition-all duration-200"
@@ -57,7 +56,7 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
         Incoming Requests
       </h2>
 
-      {/* Conditional Rendering */}
+  
       {user.length === 0 ? (
         <p className="text-gray-400 text-sm text-center">
           No incoming requests yet.
@@ -72,7 +71,7 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
                 key={index}
                 className="bg-[#1e1e1e] border border-[#2d2d2d] rounded-xl p-5 shadow-md "
               >
-                {/* Avatar + Name + Designation */}
+              
                 <div className="flex items-center gap-4">
                   <img
                     src={user?.photoUrl}
@@ -87,7 +86,7 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
                   </div>
                 </div>
 
-                {/* Social Links */}
+             
                 {(user?.github || user?.linkedin) && (
                   <div className="flex gap-4 mt-3">
                     {user?.github && (
@@ -115,7 +114,7 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
                   </div>
                 )}
 
-                {/* Tech Stack */}
+            
                 {user?.techStack?.length > 0 && (
                   <div className="mt-4">
                     <h3 className="text-sm text-gray-400 mb-2">Skills:</h3>
@@ -132,7 +131,7 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
                   </div>
                 )}
 
-                {/* Action Buttons */}
+        
                 <div className="flex justify-end gap-3 mt-5">
                   <button
                     className="px-4 py-2 rounded-md bg-green-600 hover:bg-green-700 text-white text-sm font-medium transition-all duration-200"
@@ -157,7 +156,7 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
         </div>
       )}
     </div>
-    // </div>
+
   );
 };
 

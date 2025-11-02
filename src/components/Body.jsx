@@ -11,8 +11,6 @@ const Body = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  //this is done so that our redux store is persistent on page referesh
-  //this also works as a authenticaation path if the user is not logged in no jwt token , so on hiting this api without login the authmiddleware throws an error and unauthorized will popup
   const fetchLoggedInUser = async () => {
     try {
       const loggedInUser = await axios.get(
@@ -27,7 +25,6 @@ const Body = () => {
         toast.error("Unauthorized!");
         navigate("/login");
       }
-      console.log(err);
     }
   };
 
@@ -39,11 +36,11 @@ const Body = () => {
     <>
       <Navbar />
       <div className="flex h-screen w-full bg-[#1E1E1E] text-[#d4d4d4]">
-        {/* Left Sidebar */}
+
         <LeftSideBar />
 
         <Outlet />
-        {/* Right Sidebar */}
+    
         <RightSideBar />
       </div>
     </>

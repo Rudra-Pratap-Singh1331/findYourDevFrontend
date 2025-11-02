@@ -51,14 +51,13 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] flex">
-      {/* Brand Name */}
+
       <div className="absolute top-6 left-8">
         <h1 className="text-3xl font-bold tracking-tight font-sans text-[#007ACC]">
           DevTinder.
         </h1>
       </div>
 
-      {/* Centered Form */}
       <div className="flex flex-1 items-center justify-center">
         <form
           className="flex flex-col gap-6 p-10 bg-[#252526] rounded-2xl shadow-lg w-[420px] border border-[#3C3C3C]"
@@ -68,7 +67,7 @@ const Login = () => {
             Log In
           </h2>
 
-          {/* Email */}
+       
           <div>
             <label className="block text-sm font-medium text-[#CCCCCC] mb-1">
               Email
@@ -84,7 +83,7 @@ const Login = () => {
             />
           </div>
 
-          {/* Password */}
+      
           <div>
             <label className="block text-sm font-medium text-[#CCCCCC] mb-1">
               Password
@@ -100,14 +99,13 @@ const Login = () => {
             />
           </div>
 
-          {/* Error Message */}
           {formError && (
             <label className="block text-sm font-medium text-[#F44747] mb-1">
               {formError?.message}
             </label>
           )}
 
-          {/* Submit */}
+ 
           <button
             type="submit"
             className="w-full py-3 bg-[#007ACC] text-white rounded-lg font-medium hover:bg-[#3794FF] transition"

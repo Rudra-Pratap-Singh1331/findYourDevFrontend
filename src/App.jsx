@@ -10,7 +10,7 @@ import MainComponent from "./components/MainComponent";
 import Devs from "./components/Devs";
 import CreatePost from "./components/CreatePost";
 import DefaultProfile from "./components/UserProfile/DefaultProfile";
-import UpdatePasswordSendOTP from "./components/updatePasswordSendOTP";
+import UpdatePasswordSendOTP from "./components/UpdatePasswordSendOTP";
 import HackathonMain from "./components/HackathonMain";
 import CreateHackathon from "./components/CreateHackathon";
 import HackathonPostContainer from "./components/HackathonPostContainer";

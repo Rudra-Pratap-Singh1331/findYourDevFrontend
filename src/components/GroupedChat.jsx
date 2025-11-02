@@ -21,7 +21,7 @@ const GroupedChat = ({ setChat, chat }) => {
         `http://localhost:1001/hackathons/chatgroup/${chatId}`,
         { withCredentials: true }
       );
-      console.log(res);
+   
       setGroupDetail(res?.data?.data[0]);
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -37,7 +37,7 @@ const GroupedChat = ({ setChat, chat }) => {
           withCredentials: true,
         }
       );
-      console.log(res);
+ 
       setMessage(res?.data?.data[0]?.messages);
     } catch (error) {
       setLoading(false);
@@ -64,12 +64,7 @@ const GroupedChat = ({ setChat, chat }) => {
     socketRef.current.on(
       "newGroupMessageIncoming",
       ({ text, time, fromUserId, senderName }) => {
-        console.log({
-          text,
-          time,
-          senderName,
-          fromUserId,
-        });
+      
         setMessage((prev) => [...prev, { text, time, fromUserId, senderName }]);
       }
     );
@@ -114,7 +109,7 @@ const GroupedChat = ({ setChat, chat }) => {
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-[#1e1e1e] border border-[#3c3c3c] rounded-lg">
-      {/* Header */}
+     
       <div className="bg-[#252526] border-b border-[#2d2d2d] p-4 flex items-center justify-between shadow-md">
         <div className="flex items-center gap-2">
           <MessageSquare className="text-[#007acc]" />
@@ -132,9 +127,9 @@ const GroupedChat = ({ setChat, chat }) => {
         </button>
       </div>
 
-      {/* Chat Section */}
+   
       <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#1e1e1e]">
-        {/* Example messages */}
+      
         {loading ? (
           <p className="text-center text-gray-500">Loading Your Chats..</p>
         ) : message.length === 0 ? (
@@ -184,7 +179,7 @@ const GroupedChat = ({ setChat, chat }) => {
         )}
       </div>
 
-      {/* Input Bar */}
+  
       <div className="bg-[#252526] border-t border-[#2d2d2d] p-4 flex items-center gap-2">
         <input
           type="text"

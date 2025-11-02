@@ -9,7 +9,7 @@ const ProfileMainBox = ({
 }) => {
   return (
     <div className="flex flex-col md:flex-row gap-8 w-full max-w-6xl">
-      {/* Left: User Form */}
+
       <div className="flex-1 bg-[#2C2C2C] p-8 rounded-xl shadow-lg overflow-y-auto max-h-[70vh]">
         <h2 className="text-3xl font-bold mb-6 text-blue-500">User Profile</h2>
         <form className="flex flex-col gap-4" onSubmit={handleOnSubmit}>
@@ -126,11 +126,11 @@ const ProfileMainBox = ({
         </form>
       </div>
 
-      {/* Right: Preview Card */}
+
       <div className="flex-1 flex flex-col items-center">
         <h2 className="text-3xl font-bold mb-4 text-blue-500">Preview Card</h2>
         <div className="card w-[60%] bg-[#2C2C2C] shadow-xl rounded-xl overflow-hidden max-h-[90vh]">
-          {/* Profile Image */}
+     
           <div className="flex justify-center mt-6">
             <img
               src={user.photoUrl || "/default-avatar.png"}
@@ -139,7 +139,6 @@ const ProfileMainBox = ({
             />
           </div>
 
-          {/* User Info */}
           <div className="p-4 flex flex-col gap-4 text-white">
             <div className="w-full flex justify-center">
               <h2

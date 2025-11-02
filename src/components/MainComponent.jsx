@@ -34,6 +34,7 @@ const MainComponent = () => {
         post?.map((post) => {
           return (
             <PostCard
+              key={post?._id}
               post={post}
               setShowCommentBoxStatus={setShowCommentBoxStatus}
               showCommentBox={showCommentBox}

@@ -13,7 +13,7 @@ const useFetchPost = () => {
       const postData = await axios.get("http://localhost:1001/posts/", {
         withCredentials: true,
       });
-      console.log(postData);
+    
       setPost(postData?.data?.data);
     } catch (error) {
       setIsLoading(false);

@@ -44,14 +44,14 @@ const HackathonPostCard = ({
         return prev.filter((p) => p._id != id);
       });
     } catch (error) {
-      console.log(error);
+ 
       toast.error(error?.response?.data?.message);
     }
   };
 
   return (
     <div className="w-full max-w-2xl mx-auto bg-[#1e1e1e] border border-[#2d2d2d] rounded-xl shadow-md p-5 mt-6 transition-all duration-300 hover:shadow-[0_0_12px_#007acc55] hover:border-[#3a3a3a]">
-      {/* Image Section (render only if image exists) */}
+   
 
       <div className="flex items-center mb-4">
         <img
@@ -81,7 +81,6 @@ const HackathonPostCard = ({
         </div>
       )}
 
-      {/* Content Section */}
       <div className="p-1 space-y-3">
         <h2 className="text-xl font-semibold text-white">
           {post.hackathonTitle}
@@ -116,7 +115,6 @@ const HackathonPostCard = ({
           </div>
         </div>
 
-        {/* Request to Join Button */}
         <button
           className="w-full mt-4 py-2 rounded-md bg-[#007acc] hover:bg-[#1f8ad1] text-white font-medium transition-all duration-300"
           onClick={

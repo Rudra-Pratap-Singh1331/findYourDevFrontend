@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import HackathonPostCard from "./HackathonPostCard";
 import IncomingRequestCard from "./IncomingRequestCard";
+import { toast } from "react-toastify";
 const HackathonPostedContainer = () => {
   const [post, setPost] = useState([]);
   const [hackathonId, setHackathonId] = useState([null]);
@@ -17,7 +18,7 @@ const HackathonPostedContainer = () => {
       );
       setPost(post?.data?.data);
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong!")
     }
   };
 

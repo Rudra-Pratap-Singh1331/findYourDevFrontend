@@ -4,18 +4,8 @@ import { Link } from "react-router-dom";
 
 const HackathonNavbar = () => {
   return (
-    <div className="w-full flex items-center justify-between px-6 py-3  gap-2 bg-[#1E1E1E] border-b border-[#2C2C2C] shadow-md">
-      {/* Left section - Search */}
-      <div className="flex items-center gap-2 w-1/3 bg-[#2D2D2D] px-3 py-2 rounded-lg focus-within:ring-2 focus-within:ring-blue-500">
-        <Search size={18} className="text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search hackathons..."
-          className="bg-transparent outline-none text-gray-200 placeholder-gray-500 w-full text-sm"
-        />
-      </div>
+    <div className="w-full flex flex-row items-center justify-around px-6 py-3  gap-2 bg-[#1E1E1E] border-b border-[#2C2C2C] shadow-md">
 
-      {/* Right section - Buttons */}
       <div className="flex items-center gap-2">
         <Link to="/hackathons/createhackathon">
           <button className="px-3 py-1 text-sm rounded-md bg-blue-600 hover:bg-blue-700 transition text-white font-medium">
