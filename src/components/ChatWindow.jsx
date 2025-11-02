@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { createSocket } from "../constant/socketConnection";
 import useFetchChat from "../hooks/useFetchChat";
 import { formatTime } from "../helpers/formatTime";
+
 const ChatWindow = ({ chat }) => {
   const { _id, fullName, photoUrl } = chat;
   const dispatch = useDispatch();
-
   const user = useSelector((store) => store.user);
   const userId = user._id;
   const { messages, setMessages, loading } = useFetchChat(_id);
@@ -20,27 +20,21 @@ const ChatWindow = ({ chat }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-
-
   useEffect(() => {
     const { socket, disconnect } = createSocket();
     socketRef.current = socket;
-
     socketRef.current.emit("joinChat", { userId, _id });
-
- 
     socketRef.current.on("messageReceived", ({ text, time, userId }) => {
       setMessages((prev) => [...prev, { text, time, fromUserId: userId }]);
     });
-
     return () => disconnect();
-  }, [userId, _id]);
+  }, [userId, _id, setMessages]);
 
- 
   const sendMessage = () => {
     if (newMessage.trim() === "") return;
-    const currHour = new Date().getHours();
-    const currminute = new Date().getMinutes();
+    const now = new Date();
+    const currHour = now.getHours();
+    const currminute = now.getMinutes();
     const formattedTime = `${currHour % 12 || 12}:${currminute
       .toString()
       .padStart(2, "0")} ${currHour >= 12 ? "PM" : "AM"}`;
@@ -63,9 +57,9 @@ const ChatWindow = ({ chat }) => {
   };
 
   return (
-    <div className="flex flex-col h-full w-full bg-[#1e1e1e] border border-[#3c3c3c] rounded-lg">
-   
-      <div className="flex items-center justify-between p-3 border-b border-[#252526]">
+    <div className="fixed inset-0 flex flex-col bg-[#1e1e1e] border border-[#3c3c3c] z-50">
+    
+      <div className="flex items-center justify-between p-3 border-b border-[#252526] sticky top-0 bg-[#1e1e1e] z-10">
         <div className="flex items-center gap-3">
           <div className="avatar">
             <div className="w-10 h-10 rounded-full border border-gray-700">
@@ -82,7 +76,6 @@ const ChatWindow = ({ chat }) => {
         </button>
       </div>
 
- 
       <div className="flex-1 overflow-y-auto p-3 space-y-2">
         {loading ? (
           <p className="text-center text-gray-500">Loading Your Chats..</p>
@@ -99,24 +92,15 @@ const ChatWindow = ({ chat }) => {
               }`}
             >
               <div
-                className={`chat-bubble max-w-[70%] break-words whitespace-pre-wrap shadow-md rounded-2xl
-            ${
-              msg.fromUserId===userId
-                ? "bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-gray-100"
-                : "bg-[#1f2024] text-gray-100"
-            }`}
+                className={`chat-bubble max-w-[70%] break-words whitespace-pre-wrap shadow-md rounded-2xl ${
+                  msg.fromUserId === userId
+                    ? "bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-gray-100"
+                    : "bg-[#1f2024] text-gray-100"
+                }`}
               >
                 {msg.text}
-                <span
-                  className={`text-[10px] font-extralight ml-2 block text-right ${
-                    msg.self ? "text-gray-300" : "text-gray-400"
-                  }`}
-                >
-                  {msg.time
-                    ? msg.time
-                    : msg.createdAt
-                    ? formatTime(msg.createdAt)
-                    : null}
+                <span className="text-[10px] font-extralight ml-2 block text-right text-gray-400">
+                  {msg.time || (msg.createdAt ? formatTime(msg.createdAt) : "")}
                 </span>
               </div>
             </div>
@@ -125,8 +109,8 @@ const ChatWindow = ({ chat }) => {
         <div ref={messagesEndRef} />
       </div>
 
-   
-      <div className="flex p-3 border-t border-[#252526] gap-2">
+
+      <div className="p-3 border-t border-[#252526] flex gap-2 sticky bottom-0 bg-[#1e1e1e] z-10">
         <input
           type="text"
           placeholder="Type a message..."

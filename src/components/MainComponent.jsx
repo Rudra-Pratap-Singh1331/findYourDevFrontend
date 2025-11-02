@@ -15,15 +15,18 @@ const MainComponent = () => {
   });
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 relative">
+    <div className="flex-1 overflow-y-auto p-3 sm:p-6 lg:p-8 relative min-h-[60vh]">
       {showCommentBox.showCommentBoxStatus ? (
         <CommentSection
           setShowCommentBoxStatus={setShowCommentBoxStatus}
           showCommentBox={showCommentBox}
         />
       ) : null}
+
       {chat ? (
-        <ChatWindow chat={chat} />
+        <div className="w-full h-full">
+          <ChatWindow chat={chat} />
+        </div>
       ) : isloading ? (
         Array(12)
           .fill(0)
@@ -31,16 +34,18 @@ const MainComponent = () => {
             return <PostShimmer key={i} />;
           })
       ) : (
-        post?.map((post) => {
-          return (
-            <PostCard
-              key={post?._id}
-              post={post}
-              setShowCommentBoxStatus={setShowCommentBoxStatus}
-              showCommentBox={showCommentBox}
-            />
-          );
-        })
+        <div className="space-y-6">
+          {post?.map((postItem) => {
+            return (
+              <PostCard
+                key={postItem?._id}
+                post={postItem}
+                setShowCommentBoxStatus={setShowCommentBoxStatus}
+                showCommentBox={showCommentBox}
+              />
+            );
+          })}
+        </div>
       )}
     </div>
   );

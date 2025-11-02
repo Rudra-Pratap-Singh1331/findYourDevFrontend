@@ -1,47 +1,41 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import HackathonPostCard from "./HackathonPostCard";
 import AppliedHackathonCard from "./AppliedHackathonCard";
 import { toast } from "react-toastify";
 
 const HackathonAppliedContainer = () => {
   const [post, setPost] = useState([]);
+
   const fetchHackathonPost = async () => {
     try {
-      const post = await axios.get(
+      const res = await axios.get(
         "http://localhost:1001/hackathons/appliedhackathons",
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
-   
-      setPost(post?.data?.data);
+      setPost(res?.data?.data || []);
     } catch (error) {
-      toast.error("Something went wrong!")
+      toast.error("Something went wrong!");
     }
   };
 
   useEffect(() => {
     fetchHackathonPost();
   }, []);
+
   return (
-    <>
-      <div className="flex-1 overflow-y-auto p-6 relative">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-[#1e1e1e]">
+      <div className="max-w-6xl mx-auto space-y-4">
         {post.length === 0 ? (
-        <p className="text-gray-400 text-sm text-center">
-          you haven't applied to any hackathons
-        </p>
-      ) :post?.map((post) => {
-          return (
-            <AppliedHackathonCard
-              key={post?._id}
-              data={post}
-              setPost={setPost}
-            />
-          );
-        })}
+          <p className="text-gray-400 text-sm text-center">
+            you haven't applied to any hackathons
+          </p>
+        ) : (
+          post.map((p) => (
+            <AppliedHackathonCard key={p._id} data={p} setPost={setPost} />
+          ))
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

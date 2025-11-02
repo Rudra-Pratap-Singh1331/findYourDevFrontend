@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Github, Linkedin, X } from "lucide-react";
-
 import axios from "axios";
 import { toast } from "react-toastify";
+
 const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
   const [user, setUser] = useState([]);
+
   const handleOnViewRequest = async (hackathonId) => {
     try {
       const res = await axios.get(
@@ -12,8 +13,8 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
         { withCredentials: true }
       );
       setUser(res?.data?.data);
-    } catch (error) {
-      toast.error("Something went wrong!")
+    } catch {
+      toast.error("Something went wrong!");
     }
   };
 
@@ -25,87 +26,83 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
         { withCredentials: true }
       );
       toast.success(res?.data?.message);
-      setUser((prev) => {
-        return prev.filter((i) => i._id != _id);
-      });
+      setUser((prev) => prev.filter((i) => i._id !== _id));
     } catch (error) {
-  
       toast.error(error?.response?.data?.message);
     }
   };
 
-  const onClose = () => {
-    setViewReq(false);
-  };
+  const onClose = () => setViewReq(false);
 
   useEffect(() => {
     handleOnViewRequest(hackathonId);
-  }, []);
+  }, [hackathonId]);
+
   return (
-  
-    <div className="w-full max-w-2xl mx-auto bg-[#1e1e1e] border border-[#2d2d2d] rounded-xl shadow-md p-5 mt-6 transition-all duration-300 hover:shadow-[0_0_12px_#007acc55] hover:border-[#3a3a3a]">
-   
+    <div className="relative w-full max-w-3xl mx-auto bg-[#1e1e1e] border border-[#2d2d2d] rounded-xl shadow-md p-4 sm:p-6 mt-6 transition-all duration-300 hover:border-[#3a3a3a]">
+ 
       <button
         onClick={onClose}
-        className="absolute top-19 right-32 text-gray-400 hover:text-white transition-all duration-200"
+        className="absolute top-3 right-3 text-gray-400 hover:text-white transition"
       >
         <X className="w-5 h-5" />
       </button>
 
-      <h2 className="text-xl font-semibold text-white mb-5">
+      <h2 className="text-xl font-semibold text-white mb-5 text-center sm:text-left">
         Incoming Requests
       </h2>
 
-  
       {user.length === 0 ? (
         <p className="text-gray-400 text-sm text-center">
           No incoming requests yet.
         </p>
       ) : (
         <div className="space-y-5">
-          {user?.map((req, index) => {
-            const user = req?.userId;
+          {user.map((req, index) => {
+            const usr = req?.userId;
 
             return (
               <div
                 key={index}
-                className="bg-[#1e1e1e] border border-[#2d2d2d] rounded-xl p-5 shadow-md "
+                className="bg-[#252526] border border-[#2d2d2d] rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
               >
-              
+         
                 <div className="flex items-center gap-4">
                   <img
-                    src={user?.photoUrl}
-                    alt={user?.fullName}
+                    src={usr?.photoUrl}
+                    alt={usr?.fullName}
                     className="w-14 h-14 rounded-full object-cover border border-[#3a3a3a]"
                   />
                   <div>
-                    <h2 className="text-lg font-semibold text-white">
-                      {user?.fullName}
+                    <h2 className="text-lg font-semibold text-white break-words">
+                      {usr?.fullName}
                     </h2>
-                    <p className="text-sm text-gray-400">{user?.designation}</p>
+                    <p className="text-sm text-gray-400 break-words">
+                      {usr?.designation}
+                    </p>
                   </div>
                 </div>
 
-             
-                {(user?.github || user?.linkedin) && (
-                  <div className="flex gap-4 mt-3">
-                    {user?.github && (
+      
+                {(usr?.github || usr?.linkedin) && (
+                  <div className="flex flex-wrap gap-4 sm:justify-center">
+                    {usr.github && (
                       <a
-                        href={user.github}
+                        href={usr.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors duration-200"
+                        className="flex items-center gap-1 text-gray-300 hover:text-white"
                       >
                         <Github className="w-4 h-4 text-[#c586c0]" />
                         <span className="text-sm">GitHub</span>
                       </a>
                     )}
-                    {user?.linkedin && (
+                    {usr.linkedin && (
                       <a
-                        href={user.linkedin}
+                        href={usr.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors duration-200"
+                        className="flex items-center gap-1 text-gray-300 hover:text-white"
                       >
                         <Linkedin className="w-4 h-4 text-[#007acc]" />
                         <span className="text-sm">LinkedIn</span>
@@ -114,38 +111,31 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
                   </div>
                 )}
 
-            
-                {user?.techStack?.length > 0 && (
-                  <div className="mt-4">
-                    <h3 className="text-sm text-gray-400 mb-2">Skills:</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {user.techStack.map((skill, i) => (
-                        <span
-                          key={i}
-                          className="text-xs px-3 py-1 bg-[#252526] text-gray-300 rounded-full border border-[#333]"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
+
+                {usr?.techStack?.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
+                    {usr.techStack.map((skill, i) => (
+                      <span
+                        key={i}
+                        className="text-xs px-3 py-1 bg-[#1e1e1e] text-gray-300 rounded-full border border-[#333]"
+                      >
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 )}
 
         
-                <div className="flex justify-end gap-3 mt-5">
+                <div className="flex flex-col sm:flex-row gap-3 sm:justify-end mt-4 sm:mt-0">
                   <button
-                    className="px-4 py-2 rounded-md bg-green-600 hover:bg-green-700 text-white text-sm font-medium transition-all duration-200"
-                    onClick={() => {
-                      handleRequest("Accepted", req?._id);
-                    }}
+                    className="px-4 py-2 rounded-md bg-green-600 hover:bg-green-700 text-white text-sm font-medium transition"
+                    onClick={() => handleRequest("Accepted", req?._id)}
                   >
                     Accept
                   </button>
                   <button
-                    className="px-4 py-2 rounded-md bg-red-600 hover:bg-red-700 text-white text-sm font-medium transition-all duration-200"
-                    onClick={() => {
-                      handleRequest("Rejected", req?._id);
-                    }}
+                    className="px-4 py-2 rounded-md bg-red-600 hover:bg-red-700 text-white text-sm font-medium transition"
+                    onClick={() => handleRequest("Rejected", req?._id)}
                   >
                     Reject
                   </button>
@@ -156,7 +146,6 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
         </div>
       )}
     </div>
-
   );
 };
 

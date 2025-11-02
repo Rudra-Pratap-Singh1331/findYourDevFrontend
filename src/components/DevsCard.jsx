@@ -11,7 +11,6 @@ const DevsCard = ({ p }) => {
         {},
         { withCredentials: true }
       );
-
       toast.success(res?.data?.message);
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -19,89 +18,51 @@ const DevsCard = ({ p }) => {
   };
 
   return (
-    <>
-      <div key={p._id} className="flex justify-center">
-        <div className="w-[260px] max-w-sm bg-[#252526] border border-[#333] shadow-md rounded-xl overflow-hidden">
-   
-          <div className="flex justify-center mt-6">
-            <img
-              src={p.photoUrl || AVATAR_DEFAULT_URL}
-              alt="Profile"
-              className="rounded-full w-32 h-32 object-cover border-4 border-[#569cd6]"
-            />
-          </div>
+    <div className="bg-[#252526] border border-[#333] rounded-xl shadow-md p-5 flex flex-col items-center text-center transition-all hover:shadow-lg hover:border-[#3a3a3a]">
 
-   
-          <div className="p-4 flex flex-col gap-4">
-            <div className="w-full flex justify-center">
-              <h2
-                className="text-center font-semibold text-[#569cd6] overflow-hidden break-words"
-                style={{
-                  display: "-webkit-box",
-                  WebkitLineClamp: 1,
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
-                {p.fullName}
-              </h2>
-            </div>
+      <img
+        src={p.photoUrl || AVATAR_DEFAULT_URL}
+        alt="Profile"
+        className="rounded-full w-28 h-28 sm:w-32 sm:h-32 object-cover border-4 border-[#569cd6] mb-4"
+      />
 
-            <div className="w-full text-left pl-2 flex flex-col gap-2 text-[#d4d4d4]">
-              <p
-                className="overflow-hidden break-words"
-                style={{
-                  display: "-webkit-box",
-                  WebkitLineClamp: 1,
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
-                <strong>Designation:</strong> {p.designation || "Not available"}
-              </p>
-              <p
-                className="overflow-hidden break-words"
-                style={{
-                  display: "-webkit-box",
-                  WebkitLineClamp: 1,
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
-                <strong>Age:</strong> {p.age || "Not available"}
-              </p>
-              <p
-                className="overflow-hidden break-words"
-                style={{
-                  display: "-webkit-box",
-                  WebkitLineClamp: 1,
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
-                <strong>Tech Stack:</strong>{" "}
-                {p.techStack.join(", ") || "Not available"}
-              </p>
 
-              <div className="flex justify-center mt-4 gap-2">
-                <button
-                  className="px-4 py-2 bg-[#007ACC] text-white rounded-md hover:bg-[#569cd6] transition"
-                  onClick={() => {
-                    handleReqType("Interested", p._id);
-                  }}
-                >
-                  Connect
-                </button>
-                <button
-                  className="px-4 py-2 bg-[#3C3C3C] text-[#d4d4d4] rounded-md hover:bg-[#2d2d30] transition"
-                  onClick={() => {
-                    handleReqType("Ignored", p._id);
-                  }}
-                >
-                  Ignore
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <h2 className="text-[#569cd6] font-semibold text-lg break-words mb-2">
+        {p.fullName}
+      </h2>
+
+      <div className="w-full text-[#d4d4d4] text-sm space-y-1">
+        <p>
+          <strong>Designation:</strong>{" "}
+          <span className="break-words">
+            {p.designation || "Not available"}
+          </span>
+        </p>
+        <p>
+          <strong>Age:</strong> {p.age || "Not available"}
+        </p>
+        <p className="break-words">
+          <strong>Tech Stack:</strong>{" "}
+          {p.techStack?.length > 0 ? p.techStack.join(", ") : "Not available"}
+        </p>
       </div>
-    </>
+
+
+      <div className="flex flex-col sm:flex-row justify-center w-full gap-3 mt-5">
+        <button
+          className="flex-1 px-4 py-2 bg-[#007ACC] text-white rounded-md hover:bg-[#569cd6] transition"
+          onClick={() => handleReqType("Interested", p._id)}
+        >
+          Connect
+        </button>
+        <button
+          className="flex-1 px-4 py-2 bg-[#3C3C3C] text-[#d4d4d4] rounded-md hover:bg-[#2d2d30] transition"
+          onClick={() => handleReqType("Ignored", p._id)}
+        >
+          Ignore
+        </button>
+      </div>
+    </div>
   );
 };
 

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { formatTime } from "../helpers/formatTime";
 import { createSocket } from "../constant/socketConnection";
+
 const GroupedChat = ({ setChat, chat }) => {
   const { chatId } = chat;
   const user = useSelector((store) => store.user);
@@ -15,16 +16,16 @@ const GroupedChat = ({ setChat, chat }) => {
   const messagesEndRef = useRef(null);
   const socketRef = useRef(null);
   const [loading, setLoading] = useState(false);
+
   const fetchChatGroupDetails = async () => {
     try {
       const res = await axios.get(
         `http://localhost:1001/hackathons/chatgroup/${chatId}`,
         { withCredentials: true }
       );
-   
       setGroupDetail(res?.data?.data[0]);
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || "Failed to load");
     }
   };
 
@@ -33,15 +34,11 @@ const GroupedChat = ({ setChat, chat }) => {
       setLoading(true);
       const res = await axios.get(
         `http://localhost:1001/chat/getgroupchats/${chatId}`,
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
- 
-      setMessage(res?.data?.data[0]?.messages);
+      setMessage(res?.data?.data[0]?.messages || []);
     } catch (error) {
-      setLoading(false);
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || "Failed to load chat");
     } finally {
       setLoading(false);
     }
@@ -50,6 +47,7 @@ const GroupedChat = ({ setChat, chat }) => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
+
   useEffect(() => {
     fetchChatGroupDetails();
     fetchChat();
@@ -58,29 +56,23 @@ const GroupedChat = ({ setChat, chat }) => {
   useEffect(() => {
     const { socket, disconnect } = createSocket();
     socketRef.current = socket;
-
     socketRef.current.emit("joinGroupChat", { chatId });
-
     socketRef.current.on(
       "newGroupMessageIncoming",
       ({ text, time, fromUserId, senderName }) => {
-      
         setMessage((prev) => [...prev, { text, time, fromUserId, senderName }]);
       }
     );
-
-    return () => {
-      disconnect();
-    };
-  }, []);
+    return () => disconnect();
+  }, [chatId]);
 
   const sendmessage = () => {
-    if (newMessage === "") return;
-    const hour = new Date().getHours();
-    const currminute = new Date().getMinutes();
-    const formattedTime = `${hour % 12 || 12}:${currminute
+    if (!newMessage.trim()) return;
+    const now = new Date();
+    const formattedTime = `${now.getHours() % 12 || 12}:${now
+      .getMinutes()
       .toString()
-      .padStart(2, "0")} ${hour >= 12 ? "PM" : "AM"}`;
+      .padStart(2, "0")} ${now.getHours() >= 12 ? "PM" : "AM"}`;
 
     socketRef.current.emit("sendGroupMessage", {
       roomId: chatId,
@@ -108,91 +100,73 @@ const GroupedChat = ({ setChat, chat }) => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-[#1e1e1e] border border-[#3c3c3c] rounded-lg">
-     
-      <div className="bg-[#252526] border-b border-[#2d2d2d] p-4 flex items-center justify-between shadow-md">
+    <div className="fixed inset-0 flex flex-col bg-[#1e1e1e] border border-[#3c3c3c] z-50">
+
+      <div className="bg-[#252526] border-b border-[#2d2d2d] p-3 sm:p-4 flex items-center justify-between sticky top-0 z-10">
         <div className="flex items-center gap-2">
           <MessageSquare className="text-[#007acc]" />
-          <h1 className="text-xl text-white font-semibold">
-            {groupDetail?.hackathonTitle}
+          <h1 className="text-lg sm:text-xl text-white font-semibold truncate">
+            {groupDetail?.hackathonTitle || "Group Chat"}
           </h1>
         </div>
         <button
           className="btn btn-ghost btn-sm text-[#569cd6] hover:text-white"
-          onClick={() => {
-            setChat(false);
-          }}
+          onClick={() => setChat(false)}
         >
           ✕
         </button>
       </div>
 
-   
-      <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#1e1e1e]">
-      
+      <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 bg-[#1e1e1e]">
         {loading ? (
-          <p className="text-center text-gray-500">Loading Your Chats..</p>
+          <p className="text-center text-gray-500">Loading...</p>
         ) : message.length === 0 ? (
           <p className="text-center text-gray-500">
             Start your first Conversation!
           </p>
         ) : (
-          <>
-            {message.map((msg, index) => {
-              return (
-                <div
-                  key={index}
-                  className={`chat ${
-                    msg.fromUserId === userId ? "chat-end" : "chat-start"
-                  }`}
-                >
-                  <div
-                    className={`chat-bubble max-w-[70%] break-words whitespace-pre-wrap shadow-md rounded-2xl
-                          ${
-                            msg.fromUserId === userId
-                              ? "bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-gray-100"
-                              : "bg-[#1f2024] text-gray-100"
-                          }`}
-                  >
-                    {msg.fromUserId !== userId && (
-                      <div className="text-[11px] font-medium text-[#a3a3a3] mb-1">
-                        {msg.senderName}
-                      </div>
-                    )}
-                    {msg.text}
-                    <span
-                      className={`text-[10px] font-extralight ml-2 block text-right ${
-                        msg.self ? "text-gray-300" : "text-gray-400"
-                      }`}
-                    >
-                      {msg.time
-                        ? msg.time
-                        : msg.createdAt
-                        ? formatTime(msg.createdAt)
-                        : null}
-                    </span>
+          message.map((msg, index) => (
+            <div
+              key={index}
+              className={`chat ${
+                msg.fromUserId === userId ? "chat-end" : "chat-start"
+              }`}
+            >
+              <div
+                className={`chat-bubble max-w-[80%] break-words whitespace-pre-wrap shadow-md rounded-2xl ${
+                  msg.fromUserId === userId
+                    ? "bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-gray-100"
+                    : "bg-[#1f2024] text-gray-100"
+                }`}
+              >
+                {msg.fromUserId !== userId && (
+                  <div className="text-[11px] font-medium text-[#a3a3a3] mb-1">
+                    {msg.senderName}
                   </div>
-                </div>
-              );
-            })}
-          </>
+                )}
+                <div>{msg.text}</div>
+                <span className="text-[10px] font-extralight ml-2 block text-right text-gray-400">
+                  {msg.time || (msg.createdAt ? formatTime(msg.createdAt) : "")}
+                </span>
+              </div>
+            </div>
+          ))
         )}
+        <div ref={messagesEndRef} />
       </div>
 
-  
-      <div className="bg-[#252526] border-t border-[#2d2d2d] p-4 flex items-center gap-2">
+
+      <div className="bg-[#252526] border-t border-[#2d2d2d] p-3 sm:p-4 flex items-center gap-2 sticky bottom-0 z-10">
         <input
           type="text"
           value={newMessage}
           placeholder="Type your message..."
-          className="input input-bordered flex-1 bg-[#1e1e1e] border-[#2d2d2d] text-white placeholder-gray-500 focus:border-[#007acc] focus:outline-none"
-          onChange={(e) => {
-            setNewMessage(e.target.value);
-          }}
-          onKeyUpCapture={handleKeyDown}
+          onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
+          className="input input-bordered flex-1 bg-[#1e1e1e] border-[#2d2d2d] text-white placeholder-gray-500 focus:outline-none"
         />
         <button
-          className="btn bg-[#007acc] hover:bg-[#0062a3] text-white border-none"
+          className="btn bg-[#007acc] hover:bg-[#0062a3] text-white"
           onClick={sendmessage}
         >
           <Send size={18} />

@@ -35,16 +35,13 @@ const Navbar = () => {
 
   return (
     <nav className="navbar bg-[#1e1e1e] shadow-md px-4 sm:px-6 py-3 border-b border-[#333] sticky top-0 z-50">
-
       <div className="flex-1 flex items-center justify-between">
-
         <Link
           to="/"
           className="text-xl sm:text-2xl font-bold text-[#569cd6] hover:text-[#4fc1ff] transition"
         >
           findYourDev's
         </Link>
-
 
         <button
           className="sm:hidden text-gray-300 hover:text-[#569cd6] text-xl"
@@ -54,7 +51,6 @@ const Navbar = () => {
         </button>
       </div>
 
-  
       <div className="hidden sm:flex items-center gap-8">
         <Link
           to="/hackathons"
@@ -74,7 +70,6 @@ const Navbar = () => {
         >
           <FaFileAlt /> Create Post
         </Link>
-
 
         <div className="dropdown dropdown-end">
           <div
@@ -101,7 +96,7 @@ const Navbar = () => {
                 Profile
               </Link>
             </li>
-           
+
             <li>
               <Link
                 to="/login"
@@ -139,7 +134,6 @@ const Navbar = () => {
             <FaFileAlt /> Create Post
           </Link>
 
-    
           <div className="flex flex-col items-center gap-2">
             <img
               src={userData?.photoUrl || AVATAR_DEFAULT_URL}
@@ -153,7 +147,7 @@ const Navbar = () => {
             >
               Profile
             </Link>
-            
+
             <button
               onClick={() => {
                 handleLogout();
