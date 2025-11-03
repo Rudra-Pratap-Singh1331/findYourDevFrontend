@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const ProfileMainBox = ({
   user,
@@ -7,9 +7,21 @@ const ProfileMainBox = ({
   handleChange,
   handleOnSubmit,
 }) => {
+  const [preview, setPreview] = useState("");
+
+  // Update preview when file selected or when existing URL is present
+  useEffect(() => {
+    if (user.photoUrl && typeof user.photoUrl === "string") {
+      setPreview(user.photoUrl);
+    } else if (user.photoUrl && user.photoUrl instanceof File) {
+      const objectUrl = URL.createObjectURL(user.photoUrl);
+      setPreview(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    }
+  }, [user.photoUrl]);
+
   return (
     <div className="flex flex-col md:flex-row gap-8 w-full max-w-6xl">
-
       <div className="flex-1 bg-[#2C2C2C] p-8 rounded-xl shadow-lg overflow-y-auto max-h-[70vh]">
         <h2 className="text-3xl font-bold mb-6 text-blue-500">User Profile</h2>
         <form className="flex flex-col gap-4" onSubmit={handleOnSubmit}>
@@ -107,14 +119,14 @@ const ProfileMainBox = ({
             className="input input-bordered w-full bg-[#3C3C3C] text-white border-gray-600"
           />
 
-          <label>Photo URL</label>
+          {/* Updated photo upload section */}
+          <label>Upload New Photo</label>
           <input
-            type="text"
+            type="file"
             name="photoUrl"
-            value={user.photoUrl}
+            accept="image/*"
             onChange={handleChange}
-            placeholder="Photo URL"
-            className="input input-bordered w-full bg-[#3C3C3C] text-white border-gray-600"
+            className="file-input file-input-bordered w-full bg-[#3C3C3C] text-white border-gray-600"
           />
 
           <button
@@ -126,15 +138,14 @@ const ProfileMainBox = ({
         </form>
       </div>
 
-
+      {/* Preview Section */}
       <div className="flex-1 flex flex-col items-center">
         <h2 className="text-3xl font-bold mb-4 text-blue-500">Preview Card</h2>
         <div className="card w-[60%] bg-[#2C2C2C] shadow-xl rounded-xl overflow-hidden max-h-[90vh]">
-     
           <div className="flex justify-center mt-6">
             <img
-              src={user.photoUrl || "/default-avatar.png"}
-              alt="Profile"
+              src={preview || "/default-avatar.png"}
+              alt="Profile Preview"
               className="rounded-full w-32 h-32 object-cover border-4 border-gray-600"
             />
           </div>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { formatTime } from "../helpers/formatTime";
+import getDate from "../helpers/getDate";
 
 const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
   const user = useSelector((store) => store.user);
@@ -69,6 +70,18 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
     }
   };
 
+  const getDate = (createdAt) => {
+    if (!createdAt) return "";
+
+    const date = new Date(createdAt);
+
+    // Options for long month name
+    const options = { day: "2-digit", month: "long", year: "numeric" };
+
+    // Convert to your local format (e.g., "12 November 2025")
+    return date.toLocaleDateString("en-IN", options);
+  };
+
   const localtime = formatTime(createdAt);
 
   return (
@@ -82,7 +95,9 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
         <div>
           <h3 className="text-[#e5e5e5] font-semibold text-lg">{fullName}</h3>
           <span>{designation}</span>{" "}
-          <p className="text-sm text-[#9ca3af]">{localtime}</p>
+          <p className="text-sm text-[#9ca3af]">
+            {localtime} , {getDate(createdAt)}
+          </p>
         </div>
       </div>
 

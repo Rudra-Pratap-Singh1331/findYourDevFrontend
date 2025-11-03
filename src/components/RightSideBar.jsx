@@ -4,6 +4,7 @@ import getDate from "../helpers/getDate";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { formatTime } from "../helpers/formatTime";
 
 const RightSideBar = ({ isOpen = false, onClose = () => {} }) => {
   const loggedInUser = useSelector((store) => store.user);
@@ -31,6 +32,17 @@ const RightSideBar = ({ isOpen = false, onClose = () => {} }) => {
         error?.response?.data?.error?.message || "Something went wrong"
       );
     }
+  };
+  const getDate = (createdAt) => {
+    if (!createdAt) return "";
+
+    const date = new Date(createdAt);
+
+    // Options for long month name
+    const options = { day: "2-digit", month: "long", year: "numeric" };
+
+    // Convert to your local format (e.g., "12 November 2025")
+    return date.toLocaleDateString("en-IN", options);
   };
 
   if (isDesktop) {
@@ -180,7 +192,7 @@ const RightSideBar = ({ isOpen = false, onClose = () => {} }) => {
 
                 {user?.fromUserId?._id === loggedInUser._id ? (
                   <div className="w-full text-center py-1 text-gray-400 text-[11px]">
-                    {`sent on ${getDate(user?.createdAt)}`}
+                    {`sent on ${formatTime(user?.createdAt)}`}
                   </div>
                 ) : (
                   <div className="flex justify-end mt-2 px-4 pb-3 gap-2">

@@ -60,18 +60,37 @@ const UpdateProfile = () => {
   }, [loggedInUser]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prev) => ({ ...prev, [name]: value }));
+    const { name, value, files } = e.target;
+    if (name === "photoUrl") {
+      setUser((prev) => ({ ...prev, photoUrl: files[0] })); 
+    } else {
+      setUser((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+
     try {
+     
+      const formData = new FormData();
+      Object.keys(user).forEach((key) => {
+        if (key === "techStack" && Array.isArray(user[key])) {
+          user[key].forEach((tech) => formData.append("techStack", tech));
+        } else {
+          formData.append(key, user[key]);
+        }
+      });
+
       const updatedUser = await axios.patch(
         "http://localhost:1001/user/profile/update",
-        { ...user },
-        { withCredentials: true }
+        formData,
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "multipart/form-data" },
+        }
       );
+
       dispatch(addUser(updatedUser?.data?.value));
       navigate("/");
     } catch (error) {
@@ -82,7 +101,6 @@ const UpdateProfile = () => {
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] p-6 flex flex-col items-center text-white">
-
       <div className="w-full max-w-6xl mb-8 bg-blue-700 text-white p-4 rounded-xl shadow-lg text-center">
         <h1 className="text-3xl font-extrabold">Update Your Profile</h1>
         <p className="mt-2 text-lg">
@@ -90,7 +108,6 @@ const UpdateProfile = () => {
         </p>
       </div>
 
-  
       <ProfileMainBox
         user={user}
         setUser={setUser}
