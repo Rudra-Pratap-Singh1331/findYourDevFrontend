@@ -21,7 +21,9 @@ const RightSideBar = ({ isOpen = false, onClose = () => {} }) => {
   const handlerequest = async (value, id) => {
     try {
       const res = await axios.post(
-        `http://localhost:1001/connection/request/review/${value}/${id}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/connection/request/review/${value}/${id}`,
         {},
         { withCredentials: true }
       );

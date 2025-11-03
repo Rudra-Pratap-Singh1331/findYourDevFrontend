@@ -9,7 +9,9 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
   const handleOnViewRequest = async (hackathonId) => {
     try {
       const res = await axios.get(
-        `http://localhost:1001/hackathons/incomingrequest/${hackathonId}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/hackathons/incomingrequest/${hackathonId}`,
         { withCredentials: true }
       );
       setUser(res?.data?.data);
@@ -21,7 +23,9 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
   const handleRequest = async (requestValue, _id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:1001/hackathons/reviewrequest/${requestValue}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/hackathons/reviewrequest/${requestValue}`,
         { _id },
         { withCredentials: true }
       );

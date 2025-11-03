@@ -24,7 +24,7 @@ const SignUp = () => {
 
     try {
       const API_RESULT = await axios.post(
-        "http://localhost:1001/signup",
+        `${import.meta.env.VITE_API_URL}/signup`,
         {
           fullName: formData.fullName,
           email: formData.email,

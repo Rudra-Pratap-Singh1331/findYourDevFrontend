@@ -11,7 +11,7 @@ const HackathonPostedContainer = () => {
   const fetchHackathonPost = async () => {
     try {
       const post = await axios.get(
-        "http://localhost:1001/hackathons/myhackathon",
+        `${import.meta.env.VITE_API_URL}/hackathons/myhackathon`,
         {
           withCredentials: true,
         }

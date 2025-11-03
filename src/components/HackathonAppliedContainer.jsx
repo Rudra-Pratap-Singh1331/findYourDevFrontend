@@ -9,7 +9,7 @@ const HackathonAppliedContainer = () => {
   const fetchHackathonPost = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:1001/hackathons/appliedhackathons",
+        `${import.meta.env.VITE_API_URL}/hackathons/appliedhackathons`,
         { withCredentials: true }
       );
       setPost(res?.data?.data || []);

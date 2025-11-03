@@ -13,7 +13,7 @@ const DefaultProfile = () => {
   const fetchLoggedInUser = async () => {
     try {
       const loggedInUser = await axios.get(
-        "http://localhost:1001/user/profile",
+        `${import.meta.env.VITE_API_URL}/user/profile`,
         {
           withCredentials: true,
         }

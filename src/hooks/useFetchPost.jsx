@@ -10,10 +10,13 @@ const useFetchPost = () => {
   const fetchPost = async () => {
     try {
       setIsLoading(true);
-      const postData = await axios.get("http://localhost:1001/posts/", {
-        withCredentials: true,
-      });
-    
+      const postData = await axios.get(
+        `${import.meta.env.VITE_API_URL}/posts/`,
+        {
+          withCredentials: true,
+        }
+      );
+
       setPost(postData?.data?.data);
     } catch (error) {
       setIsLoading(false);

@@ -32,7 +32,7 @@ const CreateHackathon = () => {
       });
 
       const res = await axios.post(
-        "http://localhost:1001/hackathons/createhackathon",
+        `${import.meta.env.VITE_API_URL}/hackathons/createhackathon`,
         data,
         {
           withCredentials: true,

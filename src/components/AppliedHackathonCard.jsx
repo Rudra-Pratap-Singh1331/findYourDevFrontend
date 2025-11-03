@@ -16,7 +16,7 @@ const AppliedHackathonCard = ({ data, setPost }) => {
   const handleCancelRequest = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:1001/hackathons/cancelrequest/${id}`
+        `${import.meta.env.VITE_API_URL}/hackathons/cancelrequest/${id}`
       );
       toast.success(res?.data?.message);
       setPost((prev) => prev.filter((p) => p._id !== id));

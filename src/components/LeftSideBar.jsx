@@ -28,9 +28,12 @@ const LeftSideBar = ({ isOpen = false, onClose = () => {} }) => {
 
   const fetchFreindList = async () => {
     try {
-      const result = await axios.get("http://localhost:1001/user/friends", {
-        withCredentials: true,
-      });
+      const result = await axios.get(
+        `${import.meta.env.VITE_API_URL}/user/friends`,
+        {
+          withCredentials: true,
+        }
+      );
       const finalresult = result?.data?.friends?.map((f) => ({
         ...f,
         messageStatus: false,
@@ -58,12 +61,10 @@ const LeftSideBar = ({ isOpen = false, onClose = () => {} }) => {
       );
     });
     return () => disconnect();
-  
   }, [userId]);
 
   useEffect(() => {
     if (!friends || friends.length === 0) fetchFreindList();
-  
   }, []);
 
   if (isDesktop) {
@@ -110,21 +111,18 @@ const LeftSideBar = ({ isOpen = false, onClose = () => {} }) => {
     );
   }
 
- 
   return (
     <div
       className={`fixed inset-0 z-50 transition-transform duration-300 ${
         isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}
     >
- 
       <div
         onClick={onClose}
         className={`absolute inset-0 bg-black/50 transition-opacity ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
       />
-
 
       <div
         className={`absolute left-0 top-0 bottom-0 w-[85%] max-w-xs bg-[#252526] border-r border-[#333] shadow-lg transform transition-transform duration-300 ${

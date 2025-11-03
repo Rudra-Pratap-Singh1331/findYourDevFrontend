@@ -13,7 +13,7 @@ const JoinedHackathons = () => {
     try {
       setLoading(true);
       const hackathons = await axios.get(
-        "http://localhost:1001/hackathons/joinedhackathons",
+        `${import.meta.env.VITE_API_URL}/hackathons/joinedhackathons`,
         {
           withCredentials: true,
         }

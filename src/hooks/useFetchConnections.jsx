@@ -8,11 +8,13 @@ const useFetchConnections = () => {
   const fetchConnections = async () => {
     try {
       setLoading(true);
-      const result = await axios.get("http://localhost:1001/user/connections", {
-        withCredentials: true,
-      });
+      const result = await axios.get(
+        `${import.meta.env.VITE_API_URL}/user/connections`,
+        {
+          withCredentials: true,
+        }
+      );
       setConnections(result?.data?.data);
-    
     } catch (error) {
       setLoading(false);
       toast.error("An error Occured while fetching Connection Requests!");

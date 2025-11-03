@@ -16,9 +16,12 @@ const Devs = () => {
   const fetchDevs = async () => {
     try {
       setLoading(true);
-      const devs = await axios.get("http://localhost:1001/user/feed", {
-        withCredentials: true,
-      });
+      const devs = await axios.get(
+        `${import.meta.env.VITE_API_URL}/user/feed`,
+        {
+          withCredentials: true,
+        }
+      );
       setFeed(devs?.data?.UsersToBeShowOnTheFeed);
     } catch (error) {
       setLoading(false);

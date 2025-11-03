@@ -7,7 +7,9 @@ const DevsCard = ({ p }) => {
   const handleReqType = async (typeofReq, id) => {
     try {
       const res = await axios.post(
-        `http://localhost:1001/connection/request/send/${typeofReq}/${id}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/connection/request/send/${typeofReq}/${id}`,
         {},
         { withCredentials: true }
       );

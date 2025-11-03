@@ -27,7 +27,7 @@ const UpdateProfile = () => {
   const fetchProfile = async () => {
     try {
       const loggedInUserResult = await axios.get(
-        "http://localhost:1001/user/profile",
+        `${import.meta.env.VITE_API_URL}/user/profile`,
         { withCredentials: true }
       );
       dispatch(addUser(loggedInUserResult?.data?.loggedInUser));
@@ -83,7 +83,7 @@ const UpdateProfile = () => {
       });
 
       const updatedUser = await axios.patch(
-        "http://localhost:1001/user/profile/update",
+        ` ${import.meta.env.VITE_API_URL}/user/profile/update`,
         formData,
         {
           withCredentials: true,

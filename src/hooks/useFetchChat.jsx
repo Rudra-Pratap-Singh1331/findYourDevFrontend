@@ -8,7 +8,7 @@ const useFetchChat = (toUserId) => {
     try {
       setLoading(true)
       const res = await axios.get(
-        `http://localhost:1001/chat/getchats/${toUserId}`,
+        `${import.meta.env.VITE_API_URL}/chat/getchats/${toUserId}`,
         {
           withCredentials: true,
         }

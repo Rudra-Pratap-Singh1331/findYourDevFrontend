@@ -36,7 +36,7 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:1001/posts/reactions",
+        `${import.meta.env.VITE_API_URL}/posts/reactions`,
         {
           _id,
         },
@@ -56,7 +56,7 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
   const handleSubmitComment = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:1001/posts/addcomment",
+        `${import.meta.env.VITE_API_URL}/posts/addcomment`,
         {
           postId: _id,
           commentData: comment,

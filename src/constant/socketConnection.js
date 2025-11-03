@@ -2,18 +2,21 @@
 import { io } from "socket.io-client";
 
 export const createSocket = () => {
-  // Always create a fresh socket instance
   let socket;
+
   if (location.hostname === "localhost") {
+    // Local development
     socket = io("http://localhost:1001", { withCredentials: true });
   } else {
-    socket = io("/", { path: "/api/socket.io" });
+    // Production (Render backend)
+    socket = io("https://findyourdev.onrender.com", {
+      withCredentials: true,
+      transports: ["websocket"],
+    });
   }
-  // Optional: return cleanup function if needed
+
   const disconnect = () => {
-    if (socket) {
-      socket.disconnect();
-    }
+    if (socket) socket.disconnect();
   };
 
   return { socket, disconnect };

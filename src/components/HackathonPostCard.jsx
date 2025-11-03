@@ -13,7 +13,7 @@ const HackathonPostCard = ({
   const handleOnRequestToJoin = async (hackathonId) => {
     try {
       const res = await axios.post(
-        "http://localhost:1001/hackathons/makerequest",
+        `${import.meta.env.VITE_API_URL}/hackathons/makerequest`,
         {
           hackathonId,
         },
@@ -29,7 +29,7 @@ const HackathonPostCard = ({
   const handleClose = async (id) => {
     try {
       const res = await axios.patch(
-        "http://localhost:1001/hackathons/closehackathon",
+        `${import.meta.env.VITE_API_URL}/hackathons/closehackathon`,
         {
           _id: id,
         },

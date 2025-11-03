@@ -8,7 +8,7 @@ const useFetchComment = (postId) => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:1001/posts/${postId}/comments`,
+        `${import.meta.env.VITE_API_URL}/posts/${postId}/comments`,
         {
           withCredentials: true,
         }

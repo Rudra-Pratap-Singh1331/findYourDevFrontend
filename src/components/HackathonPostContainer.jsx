@@ -7,9 +7,12 @@ const HackathonPostContainer = () => {
   const [post, setPost] = useState([]);
   const fetchHackathonPost = async () => {
     try {
-      const post = await axios.get("http://localhost:1001/hackathons/", {
-        withCredentials: true,
-      });
+      const post = await axios.get(
+        `${import.meta.env.VITE_API_URL}/hackathons/`,
+        {
+          withCredentials: true,
+        }
+      );
       setPost(post?.data?.hackathonList);
     } catch (error) {
       toast.error("Something went Wrong!")

@@ -20,7 +20,7 @@ const GroupedChat = ({ setChat, chat }) => {
   const fetchChatGroupDetails = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:1001/hackathons/chatgroup/${chatId}`,
+        `${import.meta.env.VITE_API_URL}/hackathons/chatgroup/${chatId}`,
         { withCredentials: true }
       );
       setGroupDetail(res?.data?.data[0]);
@@ -33,7 +33,7 @@ const GroupedChat = ({ setChat, chat }) => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:1001/chat/getgroupchats/${chatId}`,
+        `${import.meta.env.VITE_API_URL}/chat/getgroupchats/${chatId}`,
         { withCredentials: true }
       );
       setMessage(res?.data?.data[0]?.messages || []);

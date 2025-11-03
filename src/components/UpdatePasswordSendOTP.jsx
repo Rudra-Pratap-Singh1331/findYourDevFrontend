@@ -18,9 +18,12 @@ const OtpPage = () => {
 
   const fetchLoggedInUser = async () => {
     try {
-      const { data } = await axios.get("http://localhost:1001/user/profile", {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/user/profile`,
+        {
+          withCredentials: true,
+        }
+      );
       dispatch(addUser(data?.loggedInUser));
     } catch (err) {
       if (err.response?.status === 401) {
@@ -33,7 +36,7 @@ const OtpPage = () => {
   const sendOtp = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:1001/emailservice/send-otp",
+        `${import.meta.env.VITE_API_URL}/emailservice/send-otp`,
         {
           toUserEmail: "rudrapsingh121@gmail.com",
         },
@@ -52,7 +55,7 @@ const OtpPage = () => {
   const handleVerify = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:1001/emailservice/verify-otp",
+        `${import.meta.env.VITE_API_URL}/emailservice/verify-otp`,
         {
           input_otp: otp,
           toUserEmail: "rudrapsingh121@gmail.com",
@@ -86,7 +89,7 @@ const OtpPage = () => {
 
     try {
       const { data } = await axios.patch(
-        "http://localhost:1001/passwordservice/updatepassword",
+        `${import.meta.env.VITE_API_URL}/passwordservice/updatepassword`,
         {
           pass: newPassword,
           userId: loggedInUser?._id,

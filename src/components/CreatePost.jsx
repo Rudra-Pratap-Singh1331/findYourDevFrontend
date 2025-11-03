@@ -29,12 +29,16 @@ const CreatePost = () => {
       }
       formData.append("postVisibility", postDetails.postVisibility);
 
-      await axios.post("http://localhost:1001/posts/create", formData, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/posts/create`,
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       toast.success("Post Created!");
       navigate("/");
     } catch (error) {
