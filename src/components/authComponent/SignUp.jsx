@@ -46,7 +46,7 @@ const SignUp = () => {
 
       <div className="absolute top-6 left-8">
         <h1 className="text-3xl font-bold tracking-tight font-sans text-[#007ACC]">
-          DevTinder.
+          findYourDev
         </h1>
       </div>
 

@@ -51,10 +51,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] flex">
-
       <div className="absolute top-6 left-8">
         <h1 className="text-3xl font-bold tracking-tight font-sans text-[#007ACC]">
-          DevTinder.
+          findYourDev
         </h1>
       </div>
 
@@ -67,7 +66,6 @@ const Login = () => {
             Log In
           </h2>
 
-       
           <div>
             <label className="block text-sm font-medium text-[#CCCCCC] mb-1">
               Email
@@ -83,7 +81,6 @@ const Login = () => {
             />
           </div>
 
-      
           <div>
             <label className="block text-sm font-medium text-[#CCCCCC] mb-1">
               Password
@@ -105,7 +102,6 @@ const Login = () => {
             </label>
           )}
 
- 
           <button
             type="submit"
             className="w-full py-3 bg-[#007ACC] text-white rounded-lg font-medium hover:bg-[#3794FF] transition"
