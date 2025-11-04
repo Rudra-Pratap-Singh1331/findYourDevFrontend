@@ -54,7 +54,7 @@ const Devs = () => {
                 Array(6)
                   .fill(0)
                   .map((_, i) => <DevShimmer key={i} />)
-              ) : feed.length === 0 ? (
+              ) : feed?.length === 0 ? (
                 <p className="text-center text-gray-500">
                   No devs, Tell them about us 😊
                 </p>
