@@ -38,7 +38,7 @@ const OtpPage = () => {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/emailservice/send-otp`,
         {
-          toUserEmail: "rudrapsingh121@gmail.com",
+          toUserEmail: loggedInUser?.email,
         },
         { withCredentials: true }
       );
@@ -58,7 +58,7 @@ const OtpPage = () => {
         `${import.meta.env.VITE_API_URL}/emailservice/verify-otp`,
         {
           input_otp: otp,
-          toUserEmail: "rudrapsingh121@gmail.com",
+          toUserEmail: loggedInUser?.email,
         },
         { withCredentials: true }
       );

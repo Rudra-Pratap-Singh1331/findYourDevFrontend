@@ -62,7 +62,7 @@ const UpdateProfile = () => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "photoUrl") {
-      setUser((prev) => ({ ...prev, photoUrl: files[0] })); 
+      setUser((prev) => ({ ...prev, photoUrl: files[0] }));
     } else {
       setUser((prev) => ({ ...prev, [name]: value }));
     }
@@ -72,7 +72,6 @@ const UpdateProfile = () => {
     e.preventDefault();
 
     try {
-     
       const formData = new FormData();
       Object.keys(user).forEach((key) => {
         if (key === "techStack" && Array.isArray(user[key])) {
