@@ -21,7 +21,6 @@ const useFetchPost = () => {
     } catch (error) {
       setIsLoading(false);
       if (error.response.status === 401) {
-        toast.error("Unauthorized!");
         navigate("/login");
       }
     } finally {
