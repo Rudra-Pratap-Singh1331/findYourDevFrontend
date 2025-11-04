@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../store/userSlice";
 import { useNavigate, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,7 +12,7 @@ import { UserPlus } from "lucide-react";
 const Body = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const user = useSelector((store) => store.user);
   const [leftOpen, setLeftOpen] = useState(false);
   const [rightOpen, setRightOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -35,7 +35,6 @@ const Body = () => {
       dispatch(addUser(loggedInUser.data.loggedInUser));
     } catch (err) {
       if (err?.response?.status === 401) {
-        toast.error("Unauthorized!");
         navigate("/login");
       }
     }
@@ -44,7 +43,6 @@ const Body = () => {
   useEffect(() => {
     fetchLoggedInUser();
   }, []);
-
 
   useEffect(() => {
     if (leftOpen) setRightOpen(false);
@@ -55,14 +53,12 @@ const Body = () => {
 
   return (
     <>
-   
       <Navbar
         onOpenLeft={() => setLeftOpen(true)}
         onOpenRight={() => setRightOpen(true)}
       />
 
       <div className="flex min-h-[calc(100vh-56px)] w-full bg-[#1E1E1E] text-[#d4d4d4] relative">
-  
         <LeftSideBar isOpen={leftOpen} onClose={() => setLeftOpen(false)} />
 
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
