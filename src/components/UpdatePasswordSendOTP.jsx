@@ -20,9 +20,7 @@ const OtpPage = () => {
     try {
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_URL}/user/profile`,
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
       dispatch(addUser(data?.loggedInUser));
     } catch (err) {
@@ -34,20 +32,26 @@ const OtpPage = () => {
   };
 
   const sendOtp = async () => {
+    if (!loggedInUser?.email) {
+      toast.error("User email not found! Please wait a moment.");
+      return;
+    }
+
     try {
+    
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/emailservice/send-otp`,
-        {
-          toUserEmail: loggedInUser?.email,
-        },
+        { toUserEmail: loggedInUser.email },
         { withCredentials: true }
       );
 
+    
       setOtpSent(true);
       toast.success("OTP sent to your email!");
     } catch (error) {
+   
       toast.error(
-        error?.response?.data?.message || "Oops Something went wrong!"
+        error?.response?.data?.message || "Oops! Something went wrong."
       );
     }
   };
@@ -72,6 +76,7 @@ const OtpPage = () => {
       }
       setOtp("");
     } catch (error) {
+  
       setOtp("");
       toast.error(
         error?.response?.data?.message || "Oops! Something went wrong."
@@ -111,17 +116,19 @@ const OtpPage = () => {
   };
 
   useEffect(() => {
-    if (!loggedInUser) fetchLoggedInUser();
-  }, []);
+    if (!loggedInUser?._id) fetchLoggedInUser();
+  }, [loggedInUser]);
+
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#1e1e1e] text-[#e5e5e5] p-4">
       {!status ? (
         <>
-          <h2 className="text-[#569cd6] text-2xl font-semibold mb-6">
+          <h2 className="text-[#569cd6] text-2xl font-semibold mb-6 text-center">
             {otpSent
               ? `A verification mail has been sent to ${loggedInUser?.email}`
-              : `Click below to send a verification code at ${loggedInUser?.email}`}
+              : `Click below to send a verification code to ${loggedInUser?.email}`}
           </h2>
 
           {!otpSent ? (
