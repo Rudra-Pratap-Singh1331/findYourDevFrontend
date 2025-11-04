@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { addUser } from "../../store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,18 +9,6 @@ import axios from "axios";
 const DefaultProfile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [user, setUser] = useState({
-    fullName:  "",
-    email:  "",
-    password: "********",
-    mobileNumber:  "",
-    age:  "",
-    gender:  "",
-    techStack:  [],
-    designation: "",
-    photoUrl:
-      "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-  });
   const loggedInUser = useSelector((store) => store.user);
   const fetchLoggedInUser = async () => {
     try {
@@ -31,20 +19,6 @@ const DefaultProfile = () => {
         }
       );
       dispatch(addUser(loggedInUser?.data?.loggedInUser));
-
-      setUser({
-    fullName: loggedInUser?.fullName || "",
-    email: loggedInUser?.email || "",
-    password: "********",
-    mobileNumber: loggedInUser?.mobileNumber || "",
-    age: loggedInUser?.age || "",
-    gender: loggedInUser?.gender || "",
-    techStack: loggedInUser?.techStack || [],
-    designation: loggedInUser?.designation || "",
-    photoUrl:
-      loggedInUser?.photoUrl ||
-      "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-  })
     } catch (err) {
       if (err.status === 401) {
         toast.error("Unauthorized!");
@@ -59,11 +33,23 @@ const DefaultProfile = () => {
     }
   }, []);
 
-  
+  const user = {
+    fullName: loggedInUser?.fullName || "",
+    email: loggedInUser?.email || "",
+    password: "********",
+    mobileNumber: loggedInUser?.mobileNumber || "",
+    age: loggedInUser?.age || "",
+    gender: loggedInUser?.gender || "",
+    techStack: loggedInUser?.techStack || [],
+    designation: loggedInUser?.designation || "",
+    photoUrl:
+      loggedInUser?.photoUrl ||
+      "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#1e1e1e] text-[#d4d4d4] p-6">
       <div className="bg-[#252526] shadow-xl rounded-2xl w-full max-w-3xl p-8 border border-[#3c3c3c]">
-     
         <div className="flex flex-col items-center gap-3 mb-8">
           <img
             src={user.photoUrl}
@@ -75,7 +61,6 @@ const DefaultProfile = () => {
           </h2>
           <p className="text-[#9cdcfe] text-sm">{user.designation || "User"}</p>
         </div>
-
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <ProfileField label="Full Name" value={user.fullName} />
@@ -95,7 +80,6 @@ const DefaultProfile = () => {
           <ProfileField label="Designation" value={user.designation} />
         </div>
 
-   
         <div className="flex flex-col md:flex-row justify-center gap-4">
           <Link to="/updateprofile">
             <button className="px-6 py-2 rounded-lg bg-[#007acc] text-white font-medium hover:bg-[#0e639c] transition">
