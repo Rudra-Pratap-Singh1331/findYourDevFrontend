@@ -35,6 +35,10 @@ const OtpPage = () => {
 
   const sendOtp = async () => {
     try {
+      if (!loggedInUser?.email) {
+        toast.error("User email not loaded yet. Please wait a second.");
+        return;
+      }
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/emailservice/send-otp`,
         {
