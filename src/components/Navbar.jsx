@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   FaUser,
@@ -17,6 +17,7 @@ import { resetRdeuxStoreOnLogout } from "../helpers/resetReduxStoreOnLogout";
 const Navbar = () => {
   const userData = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -28,6 +29,7 @@ const Navbar = () => {
       );
       resetRdeuxStoreOnLogout(dispatch);
       toast.success(result.data.message);
+      navigate("/login");
     } catch (error) {
       toast.error(error?.response?.data?.message || "Oops Error Occured!");
     }

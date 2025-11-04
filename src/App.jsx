@@ -1,3 +1,4 @@
+import React, { Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Body from "./components/Body";
 import SignUp from "./components/authComponent/SignUp";
@@ -12,13 +13,33 @@ import CreatePost from "./components/CreatePost";
 import DefaultProfile from "./components/UserProfile/DefaultProfile";
 import UpdatePasswordSendOTP from "./components/UpdatePasswordSendOTP";
 import HackathonMain from "./components/HackathonMain";
-import CreateHackathon from "./components/CreateHackathon";
-import HackathonPostContainer from "./components/HackathonPostContainer";
-import HackathonPostedContainer from "./components/HackathonPostedContainer";
+// import CreateHackathon from "./components/CreateHackathon";
+// import HackathonPostContainer from "./components/HackathonPostContainer";
+// import HackathonPostedContainer from "./components/HackathonPostedContainer";
 import AppliedHackathonCard from "./components/AppliedHackathonCard";
-import HackathonAppliedContainer from "./components/HackathonAppliedContainer";
-import JoinedHackathons from "./components/JoineHackathons";
+// import HackathonAppliedContainer from "./components/HackathonAppliedContainer";
+// import JoinedHackathons from "./components/JoineHackathons";
 import GroupedChat from "./components/GroupedChat";
+import HackathonPostCardShimmer from "./components/HackathonPostCardShimmer";
+
+const HackathonPostContainer = React.lazy(() =>
+  import("./components/HackathonPostContainer")
+);
+const CreateHackathon = React.lazy(() =>
+  import("./components/CreateHackathon")
+);
+
+const HackathonPostedContainer = React.lazy(() =>
+  import("./components/HackathonPostedContainer")
+);
+
+const HackathonAppliedContainer = React.lazy(() =>
+  import("./components/HackathonAppliedContainer")
+);
+
+const JoinedHackathons = React.lazy(() =>
+  import("./components/JoineHackathons")
+);
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -64,23 +85,59 @@ const App = () => {
           children: [
             {
               path: "/hackathons",
-              element: <HackathonPostContainer />,
+              element: (
+                <Suspense fallback={<HackathonPostCardShimmer />}>
+                  <HackathonPostContainer />
+                </Suspense>
+              ),
             },
             {
               path: "/hackathons/createhackathon",
-              element: <CreateHackathon />,
+              element: (
+                <Suspense
+                  fallback={
+                    <div className="text-center text-gray-500">loading....</div>
+                  }
+                >
+                  <CreateHackathon />
+                </Suspense>
+              ),
             },
             {
               path: "/hackathons/postedhackathon",
-              element: <HackathonPostedContainer />,
+              element: (
+                <Suspense
+                  fallback={
+                    <div className="text-center text-gray-500">loading....</div>
+                  }
+                >
+                  <HackathonPostedContainer />
+                </Suspense>
+              ),
             },
             {
               path: "/hackathons/appliedhackathons",
-              element: <HackathonAppliedContainer />,
+              element: (
+                <Suspense
+                  fallback={
+                    <div className="text-center text-gray-500">loading....</div>
+                  }
+                >
+                  <HackathonAppliedContainer />
+                </Suspense>
+              ),
             },
             {
               path: "/hackathons/joinedhackathons",
-              element: <JoinedHackathons />,
+              element: (
+                <Suspense
+                  fallback={
+                    <div className="text-center text-gray-500">loading....</div>
+                  }
+                >
+                  <JoinedHackathons />
+                </Suspense>
+              ),
             },
             {
               path: "/hackathons/chat",
@@ -95,8 +152,8 @@ const App = () => {
     <>
       <Provider store={appStore}>
         <RouterProvider router={router} />
-        <ToastContainer position="top-right" autoClose={500} />
       </Provider>
+      <ToastContainer position="top-right" autoClose={500} />
     </>
   );
 };
