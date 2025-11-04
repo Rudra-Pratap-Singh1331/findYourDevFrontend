@@ -50,11 +50,19 @@ const Devs = () => {
 
           <div className="flex-1 overflow-y-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-8">
-              {loading
-                ? Array(6)
-                    .fill(0)
-                    .map((_, i) => <DevShimmer key={i} />)
-                : feed?.map((p) => <DevsCard key={p._id} p={p} />)}
+              {loading ? (
+                Array(6)
+                  .fill(0)
+                  .map((_, i) => <DevShimmer key={i} />)
+              ) : feed.length === 0 ? (
+                <p className="text-center text-gray-500">
+                  No devs, Tell them about us 😊
+                </p>
+              ) : (
+                feed?.map((p) => (
+                  <DevsCard key={p._id} p={p} setFeed={setFeed} feed={feed} />
+                ))
+              )}
             </div>
           </div>
         </>
