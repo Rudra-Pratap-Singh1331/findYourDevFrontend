@@ -138,7 +138,11 @@ const PostCard = ({ post, setShowCommentBoxStatus, showCommentBox }) => {
       </div>
 
       <div className="flex items-center gap-3 mt-4">
-        <img src={user?.photoUrl} alt="user" className="w-9 h-9 rounded-full" />
+        <img
+          src={user?.photoUrl || AVATAR_DEFAULT_URL}
+          alt="user"
+          className="w-9 h-9 rounded-full"
+        />
         <input
           type="text"
           placeholder="Write a comment..."

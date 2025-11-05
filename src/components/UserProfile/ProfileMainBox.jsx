@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { AVATAR_DEFAULT_URL } from "../../constant/constant";
 const ProfileMainBox = ({
   user,
   setUser,
@@ -144,7 +144,7 @@ const ProfileMainBox = ({
         <div className="card w-[60%] bg-[#2C2C2C] shadow-xl rounded-xl overflow-hidden max-h-[90vh]">
           <div className="flex justify-center mt-6">
             <img
-              src={preview || "/default-avatar.png"}
+              src={preview || AVATAR_DEFAULT_URL}
               alt="Profile Preview"
               className="rounded-full w-32 h-32 object-cover border-4 border-gray-600"
             />

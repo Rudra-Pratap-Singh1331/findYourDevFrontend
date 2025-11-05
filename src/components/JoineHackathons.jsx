@@ -19,10 +19,9 @@ const JoinedHackathons = () => {
         }
       );
       setHackathon(hackathons?.data?.data);
-
     } catch (error) {
       setLoading(false);
-      toast.error("Something went wrong!")
+      toast.error("Something went wrong!");
     } finally {
       setLoading(false);
     }

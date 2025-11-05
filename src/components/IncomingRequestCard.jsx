@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Github, Linkedin, X } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { AVATAR_DEFAULT_URL } from "../constant/constant";
 
 const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
   const [user, setUser] = useState([]);
@@ -73,7 +74,7 @@ const IncomingRequestCard = ({ setViewReq, hackathonId }) => {
          
                 <div className="flex items-center gap-4">
                   <img
-                    src={usr?.photoUrl}
+                    src={usr?.photoUrl || AVATAR_DEFAULT_URL}
                     alt={usr?.fullName}
                     className="w-14 h-14 rounded-full object-cover border border-[#3a3a3a]"
                   />
