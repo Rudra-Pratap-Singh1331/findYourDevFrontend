@@ -7,3 +7,17 @@ The platform allows developers to discover and connect with like-minded peers, s
 Developers can also post hackathon team-formation requests, describing their idea, required roles, and skills needed. Other developers can apply to these hackathon posts by sharing their profiles. Upon approval by the hackathon owner, selected applicants are added to a dedicated team group, which includes a group chat where all team members can communicate and coordinate effectively throughout the hackathon.
 
 Overall, findYourDev streamlines developer discovery, networking, and team collaboration, making hackathon participation faster, more organized, and more productive.
+
+## Tech Stack
+- Frontend: React, Tailwind CSS, Daisy UI
+- Backend: Node.js, Express.js, Redis, Multer, Cloudinary
+- Database: MongoDB
+- Real-time: Socket.IO
+- Authentication: JWT
+
+## Installation
+
+1. Clone the repository
+```npm
+git clone https://github.com/Rudra-Pratap-Singh1331/findYourDevFrontend.git
+```
