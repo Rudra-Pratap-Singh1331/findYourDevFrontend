@@ -31,27 +31,22 @@ npm install
 npm run dev
 ```
 # Usage
-# 1. Sign Up / Login
+## 1. Sign Up / Login
 Create a new account or log in using your existing credentials to access the platform.
 
-# 2. Complete Onboarding Profile
+## 2. Complete Onboarding Profile
 After logging in for the first time, complete your onboarding profile by adding your skills, tech stack, experience level, and a brief bio. This helps others discover you and form better teams.
 
-# 3. Explore the Home Page
+## 3. Explore the Home Page
 On the home page, you can:
+      ->View hackathon team-formation posts created by other developers
+      ->Discover ongoing hackathon opportunities
+      ->Stay updated with new team requests
 
-View hackathon team-formation posts created by other developers
-
-Discover ongoing hackathon opportunities
-
-Stay updated with new team requests
-
-Create a Hackathon Post
+## 4. Create a Hackathon Post
 You can create your own hackathon request post by describing:
-
-The hackathon idea
-
-Required roles and skills
+     ->The hackathon idea
+     ->Required roles and skills
 
 Team size and expectations
 
