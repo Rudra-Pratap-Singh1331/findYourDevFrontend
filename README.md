@@ -10,7 +10,7 @@ Overall, findYourDev streamlines developer discovery, networking, and team colla
 
 ## Tech Stack
 - Frontend: React, Tailwind CSS, Daisy UI
-- Backend: Node.js, Express.js, Redis, Multer, Cloudinary
+- Backend: Node.js, Express.js, Redis, Multer, Cloudinary, Resend
 - Database: MongoDB
 - Real-time: Socket.IO
 - Authentication: JWT
@@ -21,3 +21,12 @@ Overall, findYourDev streamlines developer discovery, networking, and team colla
 ```npm
 git clone https://github.com/Rudra-Pratap-Singh1331/findYourDevFrontend.git
 ```
+2. Install Dependencies
+```npm
+npm install
+```
+3. Start the Server
+```npm
+npm run dev
+```
+
