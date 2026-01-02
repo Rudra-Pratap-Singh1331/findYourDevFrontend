@@ -1,5 +1,5 @@
 # findYourDev's Frontend
-## Project Description
+# Project Description
 findYourDev is a developer networking and hackathon team-formation platform designed to help developers connect, collaborate, and build teams efficiently.
 
 The platform allows developers to discover and connect with like-minded peers, send connection requests, and accept or reject incoming requests to grow their professional network. Connected users can chat with each other in real time, enabling seamless communication and collaboration.
@@ -8,7 +8,7 @@ Developers can also post hackathon team-formation requests, describing their ide
 
 Overall, findYourDev streamlines developer discovery, networking, and team collaboration, making hackathon participation faster, more organized, and more productive.
 
-## Tech Stack
+# Tech Stack
 
 - Frontend: React, Tailwind CSS, Daisy UI
 - Backend: Node.js, Express.js, Redis, Multer, Cloudinary, Resend
@@ -16,7 +16,7 @@ Overall, findYourDev streamlines developer discovery, networking, and team colla
 - Real-time: Socket.IO
 - Authentication: JWT
 
-## Installation
+# Installation
 
 1. Clone the repository
 ```npm
@@ -30,7 +30,7 @@ npm install
 ```npm
 npm run dev
 ```
-## Usage
+# Usage
 # 1. Sign Up / Login
 Create a new account or log in using your existing credentials to access the platform.
 
