@@ -39,52 +39,51 @@ After logging in for the first time, complete your onboarding profile by adding 
 
 ## 3. Explore the Home Page
 On the home page, you can:
-      ->View hackathon team-formation posts created by other developers
-      ->Discover ongoing hackathon opportunities
-      ->Stay updated with new team requests
+1. View hackathon team-formation posts created by other developers
+2. Discover ongoing hackathon opportunities
+3. Stay updated with new team requests
 
 ## 4. Create a Hackathon Post
 You can create your own hackathon request post by describing:
-     ->The hackathon idea
-     ->Required roles and skills
-
-Team size and expectations
+1. The hackathon idea
+2. Required roles and skills
+3. Team size and expectations
 
 Other developers can apply to your post by sharing their profiles.
 
-Apply to Hackathon Team Requests
+## 5. Apply to Hackathon Team Requests
 Browse hackathon posts created by others and apply to teams that match your interests and skills.
 
-Developer Connections
+## 6.Developer Connections
 Visit the Developers Page to:
 
-Discover other developers on the platform
+1. Discover other developers on the platform
 
-Send connection requests
+2. Send connection requests
 
-Accept or reject incoming connection requests
+3. Accept or reject incoming connection requests
 
-Real-Time Chat
+## 7.Real-Time Chat
 Once connected, you can:
 
-Chat one-to-one with developers in real time
+1. Chat one-to-one with developers in real time
 
-Discuss ideas, availability, and collaboration details
+2. Discuss ideas, availability, and collaboration details
 
-Group Chat for Hackathon Teams
+## 8.Group Chat for Hackathon Teams
 When a hackathon owner approves your application, you are added to a dedicated team group where:
 
-All approved team members are present
+1. All approved team members are present
 
-Group chat is available for coordination and planning
+2. Group chat is available for coordination and planning
 
-Profile Management
+## 9. Profile Management
 You can update your profile anytime to reflect:
 
-New skills
+1. New skills
 
-Updated experience
+2. Updated experience
 
-Current availability
+3. Current availability
 
 
