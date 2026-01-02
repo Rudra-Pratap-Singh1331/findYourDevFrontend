@@ -1,3 +1,9 @@
 # findYourDev's Frontend
 ## Project Description
-  findYourDev's is a Developers + Team formation(Hackathons) platform where Developers can connect with each other chat with them in real time , users can post hackathon request post where the other developers can apply it shares the profile and on apprval by the hackathon ownner they will     be added to a groupt consisting a group chat where other members who are participant of that tema will be present.
+findYourDev is a developer networking and hackathon team-formation platform designed to help developers connect, collaborate, and build teams efficiently.
+
+The platform allows developers to discover and connect with like-minded peers, send connection requests, and accept or reject incoming requests to grow their professional network. Connected users can chat with each other in real time, enabling seamless communication and collaboration.
+
+Developers can also post hackathon team-formation requests, describing their idea, required roles, and skills needed. Other developers can apply to these hackathon posts by sharing their profiles. Upon approval by the hackathon owner, selected applicants are added to a dedicated team group, which includes a group chat where all team members can communicate and coordinate effectively throughout the hackathon.
+
+Overall, findYourDev streamlines developer discovery, networking, and team collaboration, making hackathon participation faster, more organized, and more productive.
