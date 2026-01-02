@@ -58,32 +58,26 @@ Browse hackathon posts created by others and apply to teams that match your inte
 Visit the Developers Page to:
 
 1. Discover other developers on the platform
-
 2. Send connection requests
-
 3. Accept or reject incoming connection requests
 
 ## 7. Real-Time Chat
 Once connected, you can:
 
 1. Chat one-to-one with developers in real time
-
 2. Discuss ideas, availability, and collaboration details
 
 ## 8. Group Chat for Hackathon Teams
 When a hackathon owner approves your application, you are added to a dedicated team group where:
 
 1. All approved team members are present
-
 2. Group chat is available for coordination and planning
 
 ## 9. Profile Management
 You can update your profile anytime to reflect:
 
 1. New skills
-
 2. Updated experience
-
 3. Current availability
 
 
